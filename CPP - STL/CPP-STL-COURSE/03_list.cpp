@@ -9,12 +9,11 @@ void explainlist(){
     ls.push_front(5);  // {5,2,4}  (unique function in case of list)
     
     
-    // in vectors, we used insert operation to insert at front.
-
+    // in vectors, we used "insert" operation to insert at front.
     // these are costly functions. time complexity wise. avoid it.
 
     // insert(pos, value) → O(n)
-    // Reason: shifts elements to the right.
+    // Reason: shifts all elements to the right by 1 unit.
 
     // erase(pos) → O(n)
     // Reason: shifts elements left.

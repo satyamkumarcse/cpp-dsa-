@@ -28,7 +28,7 @@ void explainvector(){
 
     Constructs the object directly in vector memory using constructor arguments.
 
-    eliminates one move or copy operation.
+    eliminates one move or copy operation. 
 
 
 
@@ -45,11 +45,13 @@ void explainvector(){
     It avoids extra move/copy operations.
     */
     
+
+
     // vector of pair datatype 
 
-    vector<pair<int,int>vec;     // vector has a pair inside it, having elements in int datatype
+    vector<pair<int,int>> vec;     // vector has a pair inside it, having elements in int datatype
     vec.push_back({1,2});
-    vec.emplace_back(1,2);    // emplace back automatically assumes it to be a pair and takes it as an input and inserts into the vector that you have defined.
+    vec.emplace_back(1,2);    // emplace back automatically assumes it to be a pair and takes it as an input and inserts into the vector that you have defined. assumes that pair is already made.
 
     vector<int> vec(5,100);    // 100 is a element appearing 5 times inside the vector.
 
@@ -64,15 +66,15 @@ void explainvector(){
     v.at(index);
 
     // 2nd 
-    // by using iterator
+    // by using iterator 
     // vec = [10,20,30,40]  assume
-    vector<int>::iterator itr = v.begin();
+    vector<int>::iterator itr = v.begin();               //   ::iterator   -->  used for looping for elements present inside a vector container.
 
     itr++;
 
-    // or write -- v.begin()+itr   
+    // or write -- v.begin()+ 1
 
-    cout<<*(itr)<<" ";
+    cout<<*(itr)<<" "; 
 
     // iterator points to the memory address of the element.
     // use * to derefrence and print actual value present on that address.
@@ -84,7 +86,7 @@ void explainvector(){
     vector<int>::iterator itr = v.rend(); // pointing just before (10)
     vector<int>::iterator itr = v.rbegin();   // pointing at 40
     // in case of rbegin 
-    // it++ --> moves from 40-30-20-10 (reverse iterator)
+    // itr++ --> moves from 40-30-20-10 (reverse iterator)
     // v.back() --> points at 40
 
 
@@ -98,12 +100,13 @@ void explainvector(){
         cout<<*(it)<<" ";
     }
 
-    // vector<int>::iterator --> auto  (short abbrevation) auto is used to automatically assing to a "vector iterator" act. the datatype is also automatically determined.
+    // vector<int>::iterator --> auto  (short abbrevation) "auto" is used to automatically assing to a "vector iterator" act. 
+    // the datatype is also automatically determined by auto.
      
 
     for( auto it= vec.begin();it!=vec.end();it++){
 
-        cout<<*(it)<<" ";
+        cout<<*(it)<<" ";              // as iterator points to memory address, there is a need to use *, in order to print the value stored inside.
     }
 
     for(auto elements : vec){
@@ -156,11 +159,7 @@ void explainvector(){
     // v2 = {10,20}
     // v1 = {30,40}
     // v.clear()  --> erases the vector 
-
-     
-
-      
-
+    // erase/insert is ingeneral costly function time complexity wise.
      
 }
 

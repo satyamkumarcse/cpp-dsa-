@@ -8,6 +8,24 @@
 // iterators 
 
 
+// What is an iterator?
+
+// An iterator is an abstraction that behaves like a pointer:
+
+// • it refers to a specific position in a container
+// • it can be incremented to move to the next element
+// • dereferencing it gives access to the stored value
+
+// vector<int>::iterator it;
+
+// auto it = vec.begin();  // returns iterator to first element
+
+//auto it = s.find(10);   // returns iterator pointing to key=10, or s.end() if not found
+
+
+  
+
+
 // pairs 
 
 pairs are a part of utility library 
@@ -42,10 +60,14 @@ void explainpair(){
     string arr[4];
     char arr[]={"hi","hello"};
     */
-
+ 
     // for declaring pair array 
     pair<int,int> arr[] = {{1,2},{3,4},{6,8}} 
     cout<<arr[1].second;
     // - index 0,1,2
     // by looking at all examples pairs can de treated as a datatype
     // present in utility header file
+
+}
+
+// x.find(key)  --> returns an iterator

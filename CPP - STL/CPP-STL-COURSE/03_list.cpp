@@ -22,7 +22,7 @@ void explainlist(){
 
 
     ls.emplace_front(); //{0,5,2,4}
-    // rest functions same as vector 
+    // rest functions same as v9ector 
     // begin,end,rbegin,rend.clear,insert,size,swap
 
 }

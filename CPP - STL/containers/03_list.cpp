@@ -22,7 +22,8 @@ void explainlist(){
 
 
     ls.emplace_front(); //{0,5,2,4}
+    ls.sort(); //{0,2,4,5}
     // rest functions same as v9ector 
-    // begin,end,rbegin,rend.clear,insert,size,swap
+    // begin,end,rbegin,rend,clear,insert,size,swap
 
 }

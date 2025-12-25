@@ -1,4 +1,85 @@
 
+
+// brute force - here means a solution written by me, which works but is not fully optimised.
+
+// 1672. Richest Customer Wealth - brute force 
+
+
+class Solution {
+public:
+    int maximumWealth(vector<vector<int>>& accounts) {
+        int count=0;
+        for(auto ele = accounts.begin() ; ele != accounts.end() ; ele ++){
+            vector<int> vecx = *(ele);
+            
+            int x = 0;
+            for(auto ele : vecx){
+                x+=ele;
+            }
+            if(x>count){
+                count = x;
+            }
+
+            
+        }
+        return count;
+        
+    }
+};
+
+// "slower" or "badly optimized" is purely due to memory copying
+
+// problematic line 
+// vector<int> vecx = *(ele);
+// this allocates new extra memory in the space
+// copying of data from 1 vector to other
+// the vector vecx is deleted after the loop terminates
+// thus slower and not optimised
+// if there were 1000 elements the program would become slow
+
+
+
+
+
+// 0ms solution 
+
+class Solution {
+public:
+    int maximumWealth(vector<vector<int>>& accounts) {
+
+
+        int sum=0;
+        int tempsum=0;
+        for(int i=0;i<accounts.size();i++){
+
+            int j = accounts[i].size();
+        tempsum=0;
+            for(int k=0;k<j;k++){
+
+                tempsum+=accounts[i][k];
+
+            }
+
+            if(tempsum>sum){
+                sum=tempsum;
+            }
+
+            
+        }
+        return sum;
+        
+    }
+};
+
+// this solution is more optimised because it just access the elements using 
+// accounts[i][k];
+// no new vector is made, no copying, no deletion 
+
+
+
+
+
+
 // brute force 1470. Shuffle the Array
 
 class Solution {
@@ -41,6 +122,8 @@ public:
 
 // Direct Indexing vec[i]=nums[i]     tc - O(1)
 // push_back -  tc -  average may be more than o(1). worst is o(n)
+
+
 
 
 
@@ -277,5 +360,4 @@ public:
 
 // can also be used to find max ele.
 auto it = max_element(v.begin(), v.end());
-
 

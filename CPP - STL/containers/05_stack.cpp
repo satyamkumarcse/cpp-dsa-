@@ -19,7 +19,7 @@ void explainstack(){
     cout<<st.empty();    // false 
 
 
-    stack<int> st1,st2;   // for declaring 2 stack ar once, having elements of int datatype.
+    stack<int> st1,st2;   // for declaring 2 stack at once, having elements of int datatype.
 
 
 

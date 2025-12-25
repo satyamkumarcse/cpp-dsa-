@@ -57,6 +57,7 @@ void explainvector(){
 
     vector<int> vec(5);      // a vector with 5 instances of 0 or any garbage value is declared (depending on a compiler)
     // even if size is declared as 5, if you try to push_back 6th element, it can be done, as dynamic nature.
+    
 
     vector<int> v2(v1);   // initialising a vector v2 with elements of vector v1
 
@@ -76,7 +77,7 @@ void explainvector(){
 
     cout<<*(itr)<<" "; 
 
-    // iterator points to the memory address of the element.
+    // iterator points to the memory address of the element present in the container.
     // use * to derefrence and print actual value present on that address.
 
     // v.begin() -- points to element present at 0th index (10).
@@ -126,7 +127,7 @@ void explainvector(){
 
 
     // deletion in a vector
-    // let a vector be {10,20,12,23}
+    // let a vector be {10,20,12,23} 
     v.erase(v.begin()+1);     // location of the address you want to delete
     // 20 will be deleted : {10,12,13}
     v.erase(v.begin()+2,v.begin()+4);   // end is excluded from range.
@@ -159,7 +160,7 @@ void explainvector(){
     // v2 = {10,20}
     // v1 = {30,40}
     // v.clear()  --> erases the vector 
-    // erase/insert is ingeneral costly function time complexity wise.
+    // erase/insert is in general costly function time complexity wise.
      
 }
 

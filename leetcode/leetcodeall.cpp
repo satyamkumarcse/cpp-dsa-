@@ -80,6 +80,68 @@ public:
 
 
 
+
+// 1295. Find Numbers with Even Number of Digits-  brute force 
+
+class Solution {
+public:
+    int findNumbers(vector<int>& nums) {
+        int result_count = 0;
+
+        for (auto ele : nums) {
+            int count = 0;            // we should make a temp vble instead of directly modifying the ele as it create copies. just for clarity.
+
+            while (ele > 0) {
+                int x = ele % 10;     // unused variables not good 
+                ele /= 10;
+                count++;
+            }
+
+            if (count % 2 == 0) {
+                result_count++;
+            }
+        }
+
+        return result_count;
+    }
+};
+
+
+//  optimised 0ms 
+
+class Solution {
+public:
+    int findNumbers(vector<int>& nums) {
+
+        int x = nums.size();
+        
+        int result_count = 0;
+
+        for(auto ele : nums){
+            int count=0;
+            int temp = ele;
+        if (temp==0){count=1;};
+
+            while(temp>0){
+            
+                temp/=10;
+                count+=1;
+            }
+
+            if(count%2==0){
+                result_count+=1;
+            }
+            
+        }
+        return result_count;
+        
+    }
+};
+
+
+
+
+
 // brute force 1470. Shuffle the Array
 
 class Solution {
@@ -361,3 +423,144 @@ public:
 // can also be used to find max ele.
 auto it = max_element(v.begin(), v.end());
 
+
+
+
+
+// 1572. Matrix Diagonal Sum - brute force 
+
+class Solution {
+public:
+    int diagonalSum(vector<vector<int>>& mat) {
+
+        
+        int x = mat.size();
+        int sum=0;
+        if(x%2==1){
+
+             for(int i=0;i<x;i++){
+                sum+=mat[i][i];
+                if(i!=(x-1)/2){
+                sum+=mat[i][x-i-1];
+
+
+                }
+    }
+            
+                  
+        }
+        else{
+            for(int k=0;k<x;k++){
+                sum+=mat[k][k];
+                sum+=mat[k][x-k-1];
+            }
+            
+           
+        }
+        return sum;
+    }
+};
+
+
+// 0ms best 
+
+
+
+class Solution {
+public:
+    int diagonalSum(vector<vector<int>>& mat) {
+
+        
+        int x = mat.size();
+        int sum=0;
+        
+
+             for(int i=0;i<x;i++){
+                sum+=mat[i][i];
+                
+                sum+=mat[i][x-i-1];     
+    }
+
+    if(x%2!=0){
+        sum-=mat[(x-1)/2][(x-1)/2];
+    }         
+       
+        return sum;
+    }
+};
+
+
+
+// 724. Find Pivot Index : brute force 
+
+
+
+class Solution {
+public:
+    int pivotIndex(vector<int>& nums) {
+
+        
+        int x = nums.size();
+       
+
+        for(int i=0;i<x;i++){
+             int sum1=0;
+             int sum2=0;
+
+            for(int j=0;j<i;j++){
+                sum1+=nums[j];
+
+            }
+            for(int k=i+1;k<x;k++){
+                sum2+=nums[k];
+            }
+            if(sum1==sum2){
+                return i;
+            }
+
+        }
+        return -1;
+
+  
+    }
+};
+
+
+
+//  best answer 0ms
+
+class Solution {
+public:
+    int pivotIndex(vector<int>& nums) {
+
+        int totalsum=0;
+         int leftsum=0;
+        
+        
+        int x = nums.size();
+        
+
+        for(auto ele : nums){
+
+            totalsum+=ele;
+            
+        }
+
+        for(int i=0;i<x;i++){
+        
+          
+            int sumright = totalsum - leftsum - nums[i];
+            
+
+            if(leftsum==sumright){
+                return i;
+            }
+              leftsum+=nums[i];
+            
+
+        }
+
+        return -1;
+    
+    }
+};

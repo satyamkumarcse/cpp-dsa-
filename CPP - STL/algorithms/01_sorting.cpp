@@ -82,14 +82,14 @@
 
 //     vector<pair<int,int>> vec = {{3,1},{2,1},{7,1},{5,2}};
 
-//     sort(vec.begin(),vec.end());
+//     sort(vec.begin(),vec.end()); 
 //     for(auto p : vec){
 
-//         cout<<p.first<<" "<<p.second<<endl;
+//         cout<<p.first<<" "<<p.second<<endl; 
 //     }
 
 //     // output:
-//     // 2 1
+       // 2 1
 //     // 3 1      // by default sorting happends on basic on first value 
 //     // 5 2
 //     // 7 1
@@ -97,6 +97,7 @@
 
 
 //     return 0;
+
 //  }
 
 
@@ -154,29 +155,62 @@
 // if second values of multiple pairs are equal then sorting to be done on the basis of first
 
 
- #include <bits/stdc++.h>
- using namespace std;
+//  #include <bits/stdc++.h>
+//  using namespace std;
 
-bool comparator(pair<int,int>p1,pair<int,int>p2){
-    if(p1.second<p2.second){return true;}
-    if(p1.second>p2.second){return false;}
+// bool comparator(pair<int,int>p1,pair<int,int>p2){
+//     if(p1.second<p2.second){return true;}
+//     if(p1.second>p2.second){return false;}
 
-    if(p1.first<p2.first){return true;}
-    else{return false;}
-}
+//     if(p1.first<p2.first){return true;}
+//     else{return false;}
+// }
 
 
- int main(){
+//  int main(){
 
-     vector<pair<int,int>> vec={{3,6},{2,4},{7,4},{5,4}};
+//      vector<pair<int,int>> vec={{3,6},{2,4},{7,4},{5,4}};
 
-    sort(vec.begin(),vec.end(),comparator);
+//     sort(vec.begin(),vec.end(),comparator);
 
-    for(auto ele : vec) {
-        cout<<ele.first<<" "<<ele.second<<endl;
+//     for(auto ele : vec) {
+//         cout<<ele.first<<" "<<ele.second<<endl;
+//     }
+
+
+
+//     return 0;
+//  }
+
+#include <stdio.h>
+int main(){
+    char a,b;
+    int c,i=0;
+    scanf("%c",&a);
+    scanf("%c",&b); 
+    scanf("%d",&c);
+    
+    
+    
+    do{if(i%2==0){
+        printf("%c",a);
+        printf(" ");
     }
+    i++;
+    
+    
+    printf("%c",b);
 
+    i++}while(i!=c);
+    
 
-
+    
+        
+        
+    }
+    
+    
+    
+    
     return 0;
- }
+}

@@ -71,9 +71,7 @@ void explainvector(){
     // vec = [10,20,30,40]  assume
     vector<int>::iterator itr = v.begin();               //   ::iterator   -->  used for looping for elements present inside a vector container.
 
-    itr++;
-
-    // or write -- v.begin()+ 1
+    itr++;  // or write -- v.begin()+ 1
 
     cout<<*(itr)<<" "; 
 
@@ -150,8 +148,8 @@ void explainvector(){
     v.insert(v.begin()+1,copy.begin(),copy.end())  
     // {30,50,50,10,10,100,100}
 
-    // v.size() --> number of elements that are present (increases by 1)
-    // v.capacity() --> that it can hold 
+    v.size() //--> number of elements that are present (increases by 1)
+     v.capacity() //--> that it can hold 
     //  increases geometrically (1,2,4,8.....)
 
     // v1 = {10,20}

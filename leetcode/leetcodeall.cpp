@@ -564,3 +564,110 @@ public:
     
     }
 };
+
+
+
+// 1991. Find the Middle Index in Array -0 ms 
+
+
+class Solution {
+public:
+    int findMiddleIndex(vector<int>& nums) {
+        int totalsum=0;
+        int x=nums.size();
+        for(auto ele : nums){
+            totalsum+=ele;
+
+        }
+
+        int leftsum=0;
+    
+
+        for(int i=0;i<x;i++){
+
+
+            int rightsum = totalsum - leftsum - nums[i];
+
+            
+            if(leftsum==rightsum){
+                return i;
+            }
+
+            leftsum+=nums[i];
+
+
+        }
+        return -1;
+
+
+        
+    }
+};
+
+
+
+
+
+// 121. Best Time to Buy and Sell Stock
+
+
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+
+        int x = prices.size();
+        int diff = 0;
+
+         for(int i=0;i<x;i++){
+            for(int j=i+1;j<x;j++){
+                if(prices[j]-prices[i]>diff){
+                    diff = prices[j]-prices[i];
+                }
+                
+
+
+            }
+            
+         }
+
+         return diff;
+        
+
+        
+    }
+};
+
+
+
+//  best 0ms 
+
+
+// INT_MAX is used to safely initialize a variable when you want to track a minimum value.
+// int x = INT_MAX;        x = largest possible value that can be stored by x integer;
+
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+
+        int minprice = INT_MAX; 
+        int profit = 0;
+
+
+        for(int i=0;i<prices.size();i++){
+
+            minprice = min(minprice,prices[i]);
+            profit = max(profit,prices[i]-minprice);
+
+        }
+
+        return profit;
+
+        
+    }
+};
+
+
+//  best time to buy stock is when price is minimum
+// best time to sell, when profit is max.

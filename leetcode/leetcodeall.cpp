@@ -218,6 +218,8 @@ public:
 
 // 0 ms- best approach 
 
+// if i am searching for an element in an unordered map in c++. if i write x.find(n) where n is element. if element is present an iterator is returned otherwise x.end() is returned.
+
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
@@ -671,3 +673,189 @@ public:
 
 //  best time to buy stock is when price is minimum
 // best time to sell, when profit is max.
+
+// 1732. Find the Highest Altitude
+
+
+
+
+
+//  brute force 
+
+class Solution {
+public:
+    int largestAltitude(vector<int>& gain) {
+        int x = gain.size();
+
+        vector<int> vec1(x+1);
+
+        vec1[0]=0;
+        int sum=0;
+        for(int i=1;i<=x;i++){
+            sum+=gain[i-1];
+            vec1[i]=sum;
+        }
+        int max=-(INT_MAX);
+
+
+        for(int j=0;j<x+1;j++){
+            if(vec1[j]>max){
+                max = vec1[j];
+            }
+        }
+        return max;
+    
+        
+    }
+};
+
+
+// 0ms best optimal 
+// initialize current  to 0. in case if all the sum's values are negative 0 will be returned.
+// otherwise peak will be returned.
+
+
+class Solution {
+public:
+    int largestAltitude(vector<int>& gain) {
+
+        int x = gain.size();
+        int sum=0;
+        int current =0;
+
+        for(int i=0;i<x;i++){
+            sum+=gain[i];
+            if(sum>current){
+                current =sum;
+            }
+        
+
+            
+        }
+        return current;
+        
+    }
+};
+
+
+// reverse a string - 0ms best
+
+
+class Solution {
+public:
+    void reverseString(vector<char>& s) {
+
+        int i = 0;
+        int j = s.size()-1;
+        while(i<j){
+
+            char x = s[i];
+            s[i]=s[j];
+            s[j]=x;
+        
+            i++;
+            j--;
+
+        }
+        
+
+        
+    }
+};
+
+
+
+
+
+
+
+// brute force - 977. Squares of a Sorted Array
+
+class Solution {
+public:
+    vector<int> sortedSquares(vector<int>& nums) {
+        
+        int x = nums.size();
+        for(int i=0;i<x;i++){
+
+            nums[i]=pow(nums[i],2);
+        }
+
+        sort(nums.begin(),nums.end());    // time com = O(n log n)
+        return nums;
+    }
+};
+
+// 0 ms best 
+
+class Solution {
+public:
+    vector<int> sortedSquares(vector<int>& nums) {
+        
+        int x = nums.size();
+        vector<int> vec(nums);
+
+        int leftside = 0;
+        int rightside = x - 1;
+        int idx = x - 1; 
+
+        while (leftside <= rightside) {
+
+            int l = nums[leftside] * nums[leftside];
+            int u = nums[rightside] * nums[rightside];
+
+            if (l > u) {
+                vec[idx] = l;
+                leftside++;
+            } else {
+                vec[idx] = u;
+                rightside--;
+            }
+
+            idx--;
+        }
+
+        return vec;
+    }
+};
+
+
+// wrong code 
+
+
+class Solution {
+public:
+    vector<int> sortedSquares(vector<int>& nums) {
+        
+        int x = nums.size();
+        vector<int>vec(nums);
+        int leftside = 0;
+        int rightside = x-1;
+        int idx = 0;
+
+        while(leftside<=rightside){
+
+            int l = nums[leftside]*nums[leftside];
+            int u = nums[rightside]*nums[rightside];
+
+            if(u>l){
+                vec[idx]=l;
+                leftside++;
+
+            }
+            else{
+                vec[idx]=u;   // wrong : The ends contain the largest absolute values, so their squares are the largest, not the smallest.
+                  rightside--;
+            }
+            
+          
+            idx++;
+            
+        }
+
+        
+
+        
+        return nums;
+    }
+};

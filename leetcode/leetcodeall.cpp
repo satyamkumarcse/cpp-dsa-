@@ -671,3 +671,155 @@ public:
 
 //  best time to buy stock is when price is minimum
 // best time to sell, when profit is max.
+
+
+
+// 35. Search Insert Position - brute force
+
+
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+
+        int x = nums.size();
+        for(int i=0;i<x;i++){
+            if(target==nums[i]){
+                return i;
+            }
+            else{
+                if(target<nums[i]){
+                    return i;
+                }
+                
+
+            }
+        }
+        return x;
+        
+    }
+};
+
+
+
+// 0ms best o(log n)  binary search 
+
+
+
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+
+        int l=0;
+        int u = nums.size()-1;
+        int midval;
+
+       
+
+        while(l<=u){
+            midval = l+(u-l)/2;
+            if(nums[midval]==target){
+                return midval ;
+                
+
+            }
+            else if(target>nums[midval]){
+                l = midval + 1;
+            }
+            else if(target<nums[midval]){
+
+                u = midval-1;
+            }
+        }
+        return l;
+
+
+        
+    }
+};
+
+
+// insert is a costly fxn as it shifts all elements by 1 index. but inserting at the end of an array is amortised to O(1)
+// insert(vec.begin(),4)  -> O(n)
+// when inside a loop -> O(n^2)  (costly kind off)
+
+
+
+
+// 66. Plus One -  brute force (only visible 3 cases pass) overflow/runtime
+
+
+class Solution {
+public:
+    vector<int> plusOne(vector<int>& digits) {
+        int x = digits.size();
+        int result;
+        string s = "";
+
+        for (int i = 0; i < x; i++) {
+            s += digits[i] + '0';
+        }
+
+        result = stoi(s);
+        result += 1;
+
+        vector<int> vec;
+        while (result > 0) {
+            int k = result % 10;
+            vec.insert(vec.begin(), k);
+            result /= 10;
+        }
+
+        return vec;
+    }
+};
+
+
+// best 0ms - optimal
+
+
+class Solution {
+public:
+    vector<int> plusOne(vector<int>& digits) {
+
+        int x = digits.size();
+
+        for(int i=x-1;i>=0;i--){
+
+            if(digits[i]<9){
+                digits[i]++;
+                return digits;
+
+            }
+            digits[i]=0;
+        }
+        digits.insert(digits.begin(),1);
+        return digits;
+        
+        
+    }
+};
+
+
+// in C++ a char is an integer data type
+// string x = "";
+// x += (5 + '0');
+// x += (6 + '0');
+
+
+/*
+eg- 
+
+vector<int> plusOne(vector<int>& digits) {
+    int x = digits.size();
+    int result;
+    string s = "";
+
+    for (int i = 0; i < x; i++) {
+
+        s += digits[i] + '0';
+
+    }
+}
+
+
+*/

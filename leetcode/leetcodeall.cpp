@@ -1,4 +1,4 @@
-
+#include <bits/stdc++.h>
 
 // brute force - here means a solution written by me, which works but is not fully optimised.
 
@@ -93,8 +93,8 @@ public:
 
             while (ele > 0) {
                 int x = ele % 10;     // unused variables not good 
-                ele /= 10;
                 count++;
+                ele /= 10;
             }
 
             if (count % 2 == 0) {
@@ -182,7 +182,7 @@ public:
     }
 };
 
-// Direct Indexing vec[i]=nums[i]     tc - O(1)
+// Direct Indexing vec[i]=nums[i]     tc - O(1) 
 // push_back -  tc -  average may be more than o(1). worst is o(n)
 
 
@@ -201,7 +201,7 @@ public:
             for (int j = i + 1; j < x; j++) {
 
                 if (nums[i] + nums[j] == target) {
-                    return {i, j};      // directly return
+                    return {i, j};      // directly return 
                 }
             }
         }
@@ -674,56 +674,13 @@ public:
 //  best time to buy stock is when price is minimum
 // best time to sell, when profit is max.
 
-<<<<<<< HEAD
 
 
 // 35. Search Insert Position - brute force
-=======
-// 1732. Find the Highest Altitude
-
-
-
-
-
-//  brute force 
-
-class Solution {
-public:
-    int largestAltitude(vector<int>& gain) {
-        int x = gain.size();
-
-        vector<int> vec1(x+1);
-
-        vec1[0]=0;
-        int sum=0;
-        for(int i=1;i<=x;i++){
-            sum+=gain[i-1];
-            vec1[i]=sum;
-        }
-        int max=-(INT_MAX);
-
-
-        for(int j=0;j<x+1;j++){
-            if(vec1[j]>max){
-                max = vec1[j];
-            }
-        }
-        return max;
-    
-        
-    }
-};
-
-
-// 0ms best optimal 
-// initialize current  to 0. in case if all the sum's values are negative 0 will be returned.
-// otherwise peak will be returned.
->>>>>>> 746414b48f48fcf6567d776337169d00b1a499b4
 
 
 class Solution {
 public:
-<<<<<<< HEAD
     int searchInsert(vector<int>& nums, int target) {
 
         int x = nums.size();
@@ -812,104 +769,6 @@ public:
             int k = result % 10;
             vec.insert(vec.begin(), k);
             result /= 10;
-=======
-    int largestAltitude(vector<int>& gain) {
-
-        int x = gain.size();
-        int sum=0;
-        int current =0;
-
-        for(int i=0;i<x;i++){
-            sum+=gain[i];
-            if(sum>current){
-                current =sum;
-            }
-        
-
-            
-        }
-        return current;
-        
-    }
-};
-
-
-// reverse a string - 0ms best
-
-
-class Solution {
-public:
-    void reverseString(vector<char>& s) {
-
-        int i = 0;
-        int j = s.size()-1;
-        while(i<j){
-
-            char x = s[i];
-            s[i]=s[j];
-            s[j]=x;
-        
-            i++;
-            j--;
-
-        }
-        
-
-        
-    }
-};
-
-
-
-
-
-
-
-// brute force - 977. Squares of a Sorted Array
-
-class Solution {
-public:
-    vector<int> sortedSquares(vector<int>& nums) {
-        
-        int x = nums.size();
-        for(int i=0;i<x;i++){
-
-            nums[i]=pow(nums[i],2);
-        }
-
-        sort(nums.begin(),nums.end());    // time com = O(n log n)
-        return nums;
-    }
-};
-
-// 0 ms best 
-
-class Solution {
-public:
-    vector<int> sortedSquares(vector<int>& nums) {
-        
-        int x = nums.size();
-        vector<int> vec(nums);
-
-        int leftside = 0;
-        int rightside = x - 1;
-        int idx = x - 1; 
-
-        while (leftside <= rightside) {
-
-            int l = nums[leftside] * nums[leftside];
-            int u = nums[rightside] * nums[rightside];
-
-            if (l > u) {
-                vec[idx] = l;
-                leftside++;
-            } else {
-                vec[idx] = u;
-                rightside--;
-            }
-
-            idx--;
->>>>>>> 746414b48f48fcf6567d776337169d00b1a499b4
         }
 
         return vec;
@@ -917,11 +776,7 @@ public:
 };
 
 
-<<<<<<< HEAD
 // best 0ms - optimal
-=======
-// wrong code 
->>>>>>> 746414b48f48fcf6567d776337169d00b1a499b4
 
 
 class Solution {
@@ -1005,5 +860,325 @@ vector<int> plusOne(vector<int>& digits) {
         
         return nums;
     }
+
+
+
+
+// toupper or tolower functions works only on single string character.
+
+string s = "HeLLo";
+
+for (char &c : s) {
+    c = tolower(c);
+}
+
+
+// best 0ms - 709. To Lower Case
+
+class Solution {
+public:
+    string toLowerCase(string s) {
+
+        int x = s.length();
+
+        for(int i=0;i<x;i++){
+            if(65<=s[i] &&  s[i]<=90){
+                s[i]+=32;
+            }
+        }
+        return s;
+        
+    }
 };
->>>>>>> 746414b48f48fcf6567d776337169d00b1a499b4
+
+// ASCII - 65-90 (A-Z)  &   97-122 (a-z) 
+
+class Solution {
+public:
+    bool isPalindrome(string s) {
+
+        int x = s.length();
+        string result = "";
+
+        for(int i=0;i<x;i++){
+            if(s[i]>=65 && s[i]<=90){
+                s[i]+=32;
+
+            }
+
+        }
+        for(int j=0;j<x;j++){
+            if(s[j]>=97 && s[j]<=122){
+
+                result+=s[j];
+            }
+        }
+
+        string final_result = "";
+        for(int k=x-1;k>=0;k--){
+            final_result +=result[k];
+
+        }
+
+        if(final_result ==result){
+            return true;
+        }
+return false;
+        
+    }
+};
+
+
+
+//  valid palindrome - brute force 
+
+
+class Solution {
+public:
+    bool isPalindrome(string s) {
+
+        
+        int x = s.length();
+        string result="";
+        string final_result = "";
+        int i=0;
+        int j = x-1;
+
+        while(i<j){
+            char temp = s[i];
+            s[i]=s[j];
+            s[j]=temp;
+            i++;
+            j--;
+        }
+
+            for(int k=0;k<x;k++){
+                if(isalnum(s[k])){
+                    result+=tolower(s[k]);
+                }
+            
+
+        }
+
+         for(int l=result.length()-1;l>=0;l--){
+            final_result +=result[l];
+
+        }
+
+        return (final_result == result);
+    }
+};
+
+
+// brute force - without using build in functions
+
+
+
+class Solution {
+public:
+    bool isPalindrome(string s) {
+
+        
+        int x = s.length();
+        string result="";
+        string final_result = "";
+
+            
+            for(int g=0;g<x;g++){
+                if(s[g]>=97 && s[g]<=122){
+
+                    result+=s[g];
+                }
+                else if(s[g]>=65 && s[g]<=90){
+
+                    result+=s[g]+32;
+                }
+                else if(s[g]>='0'&&s[g]<='9'){
+                    result+=s[g];
+                }
+            }
+        
+        for(int l=result.length()-1;l>=0;l--){
+            final_result +=result[l];
+
+        }
+
+        return(final_result == result);
+    }
+};
+
+
+// best soln 0ms 
+
+
+class Solution {
+public:
+    bool isPalindrome(string s) {
+
+        int i = 0;
+        int j = s.length()-1;
+
+        while(i<j){
+
+            if(!isalnum(s[i])){
+                i++;
+                continue;
+ 
+            }
+            if(!isalnum(s[j])){
+                j--;
+                continue;
+            }
+
+            if(tolower(s[i])!=tolower(s[j])){
+                return false;     // there is no need to check further
+            }
+            i++;
+            j--;
+
+        }
+
+        return true;
+        
+    }
+};
+
+
+
+// one more best 0ms 
+
+
+class Solution {
+public:
+    bool isPalindrome(string s) {
+
+        int i=0;
+        int j = s.length();
+
+        while (i < j) {
+
+    while (i < j && !isalnum(s[i])) i++;
+    while (i < j && !isalnum(s[j])) j--;
+
+    if (tolower(s[i]) != tolower(s[j])) {
+        return false;
+    }
+
+    i++;
+    j--;
+}
+return true;
+        
+    }
+};
+
+
+
+// Why this is optimal
+// Single pass over the string
+// No extra strings or arrays
+// Uses two pointers
+// Stops early on mismatch
+
+// Handles:
+// Uppercase and lowercase
+// Digits
+// Spaces and symbols
+
+// Time complexity: O(n)
+// Space complexity: O(1)
+
+// How this improves your brute force logic
+
+// Your version:
+
+// Creates two extra strings
+// Reverses the string manually
+// Uses more memory
+// Always processes full input
+
+// This version:
+
+// Compares only what is needed
+// Skips junk characters directly
+// Exits immediately on failure
+
+
+
+
+// prefer functions like alnum and tolower , toupper
+
+// over 
+
+// if ((s[i] >= 'a' && s[i] <= 'z') ||
+// (s[i] >= 'A' && s[i] <= 'Z') ||
+// (s[i] >= '0' && s[i] <= '9'))
+
+
+
+
+
+// length of last word - 58 
+// wrong soln
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+
+        int x = s.length();
+        int length=0;
+
+        for(int i=0;i<x;i++){
+
+            if(s[i]==' '){
+                length=0;
+                continue;
+            }
+            else if(s[i]>=65 && s[i]<=90 || s[i]>=97 && s[i]<=122){
+                length++;
+            }
+        }
+        return length;
+
+
+
+
+        
+    }
+};
+
+
+// brute force soln 
+
+
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+
+        int x = s.length();
+        int length=0;
+        int temp=0;
+        
+
+        for(int i=0;i<x;i++){
+
+            if(s[i]==' '){
+            
+                
+                length=0;
+                continue;
+            }
+            else if(s[i]>=65 && s[i]<=90 || s[i]>=97 && s[i]<=122){
+                length++;
+                
+            }
+            temp = length;
+        }
+        return temp;
+    
+    }
+};
+
+// problem with the brute force ans
+// we only care about the last word, but:
+// You process every character, even those that cannot affect the answer.
+// Characters before the last word are useless to compute.

@@ -43,7 +43,7 @@ using namespace std;
 void selectionsort(vector<int> &vec1,int x){
 
     
-    for(int i=0;i<x-1;i++){
+    for(int i=0;i<x-1;i++){             // GOES TO ONLY SECOND LAST ELE
         int min = i;
         int j;
         for(j=i+1;j<x;j++){
@@ -81,4 +81,4 @@ int main(){
 
 // time complexity 
 // O(n^2) -> best,worst & average case 
- 
+// Selection Sort MUST always check every element, Because it needs to be CERTAIN it found the actual minimum.

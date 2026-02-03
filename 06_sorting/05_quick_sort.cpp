@@ -4,7 +4,7 @@ also known as divide and conquer algorithm
 
 
 t.c -> O(n logn)
-s.c -> O(1)   -> as it dont use any temp array like in the merge sort
+s.c -> O(1)   -> as it dont use any temp vector array like in the merge sort
 
 quick sort is thus slightly better than merge sort 
 
@@ -139,7 +139,7 @@ int f(arr,low,high){
         j--;
         }
 
-        if(i<j){       // if j crosses i, do not swap anymore. the moment j crosses i, that index becomes pivot index {j}
+        if(i<j){       // if j crosses i, do not swap anymore. the moment j crosses i, that index becomes partition index {j}
             swap(arr[i],arr[j]); 
 
         }
@@ -226,6 +226,10 @@ int main(){
 
         cout<<ele<<" ";
     }
+
+ 
+
+    
 
 
     return 0;

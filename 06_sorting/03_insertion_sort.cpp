@@ -1,7 +1,7 @@
 /*
 INSERTION SORT 
 
-takes an element and places it at its correct order 
+takes an element and places it at its correct place in the sorted region of the array
 [14 9 15 12 6 8 13]
 take just one element 14, and make an array which just has 14.
 [14]

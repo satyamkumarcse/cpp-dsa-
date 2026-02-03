@@ -1,4 +1,4 @@
-// map container is used to store key:value pairs
+// map container is used to store key:value pairs 
 // the keys are always unique. there cant be a duplicate key. eg-roll no,product_ids
 // eg- productid : quantity 
 // quantity bought may be same for 2 products, but product cant.

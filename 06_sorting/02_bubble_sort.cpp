@@ -41,23 +41,25 @@ using namespace std;
 void bubblesort(vector<int> &vec1,int x){
 
     for(int i=0;i<x-1;i++){
-        int swapped=0;
+        // int swapped=0;
         for(int j =0;j<x-i-1;j++){
-            if(vec1[j]>vec1[j+1]){
+            if(vec1[j]>vec1[j+1]){             // in best case, this condition is false from start itself
                 int temp = vec1[j];
                 vec1[j]=vec1[j+1];
                 vec1[j+1]=temp;
-                swapped =1;
+                // swapped =1;
         
             }
             
 
         }
 
-        if(swapped==0){
-            break;
-        }
-        cout<<"runs\n";   // for checking how many times it runs
+        // if(swapped==0){
+        //     break;
+        // }
+
+
+        cout<<"runs\n";   // for checking how many times it runs (6 times normally, 3 times if we optimise)
     }
 
 }
@@ -116,7 +118,7 @@ int main(){
 
         }
     }
-    */
+    
 
  
  // instead of running the loop till end (till i==n-1), if in case the array gets sorted in between, break out of the loop

@@ -1,7 +1,7 @@
 // // print name N time using recursion
 
-#include <bits/stdc++.h>
- using namespace std;
+// #include <bits/stdc++.h>
+//  using namespace std;
 
 //  void printer(string name,int x){
     
@@ -490,41 +490,166 @@
 
 
 
-bool palindromecheck(string word, int i,int x){
+// bool palindromecheck(string word, int i,int x){
 
 
-    if(i>=x/2){
+//     if(i>=x/2){
 
-        return true;
-    }
+//         return true;
+//     }
 
-    if(word[i]!=word[x-i-1]){
-        return false;
-    }
+//     if(word[i]!=word[x-i-1]){
+//         return false;
+//     }
   
-    return palindromecheck(word,i+1,x);
+//     return palindromecheck(word,i+1,x);
 
 
-} 
+// } 
 
 
 
 
-int main(){
+// int main(){
 
-    string word;
-    int i;
+//     string word;
+//     int i;
 
-    cout<<"enter string word to check palindrome: ";
-    cin>>word;
+//     cout<<"enter string word to check palindrome: ";
+//     cin>>word;
 
 
-    int x = word.length();
+//     int x = word.length();
 
-    bool z = palindromecheck(word,0,x);
+//     bool z = palindromecheck(word,0,x);
 
-    cout<<z;
+//     cout<<z;
  
 
+// }
+
+
+
+
+
+#include <iostream>
+#include <vector>
+#include <string>
+#include <iomanip>
+using namespace std;
+
+// Class representing a single expense
+class Expense {
+private:
+    string category;
+    double amount;
+    string description;
+
+public:
+    Expense(string cat, double amt, string desc)
+        : category(cat), amount(amt), description(desc) {}
+
+    double getAmount() const { return amount; }
+    string getCategory() const { return category; }
+    string getDescription() const { return description; }
+
+    void display() const {
+        cout << setw(10) << category << " | "
+             << setw(8) << amount << " | "
+             << description << endl;
+    }
+};
+
+// Class representing the expense tracker
+class ExpenseTracker {
+private:
+    vector<Expense> expenses;
+
+public:
+    void addExpense(const Expense& exp) {
+        expenses.push_back(exp);
+    }
+
+    void showAllExpenses() const {
+        cout << "\n--- Expense List ---\n";
+        cout << setw(10) << "Category" << " | "
+             << setw(8) << "Amount" << " | "
+             << "Description" << endl;
+        cout << "-----------------------------------\n";
+        for (const auto& exp : expenses) {
+            exp.display();
+        }
+    }
+
+    void showTotal() const {
+        double total = 0;
+        for (const auto& exp : expenses) {
+            total += exp.getAmount();
+        }
+        cout << "\nTotal Expenses: " << total << endl;
+    }
+
+    void showByCategory(const string& category) const {
+        cout << "\n--- Expenses in Category: " << category << " ---\n";
+        double total = 0;
+        for (const auto& exp : expenses) {
+            if (exp.getCategory() == category) {
+                exp.display();
+                total += exp.getAmount();
+            }
+        }
+        cout << "Total in " << category << ": " << total << endl;
+    }
+};
+
+int main() {
+    ExpenseTracker tracker;
+    int choice;
+
+    do {
+        cout << "\nExpense Tracker Menu:\n";
+        cout << "1. Add Expense\n";
+        cout << "2. Show All Expenses\n";
+        cout << "3. Show Total Expenses\n";
+        cout << "4. Show Expenses by Category\n";
+        cout << "5. Exit\n";
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        if (choice == 1) {
+            string category, description;
+            double amount;
+            cout << "Enter category: ";
+            cin >> category;
+            cout << "Enter amount: ";
+            cin >> amount;
+            cin.ignore(); // clear newline
+            cout << "Enter description: ";
+            getline(cin, description);
+
+            tracker.addExpense(Expense(category, amount, description));
+            cout << "Expense added successfully!\n";
+        }
+        else if (choice == 2) {
+            tracker.showAllExpenses();
+        }
+        else if (choice == 3) {
+            tracker.showTotal();
+        }
+        else if (choice == 4) {
+            string category;
+            cout << "Enter category to filter: ";
+            cin >> category;
+            tracker.showByCategory(category);
+        }
+        else if (choice == 5) {
+            cout << "Exiting Expense Tracker. Goodbye!\n";
+        }
+        else {
+            cout << "Invalid choice. Try again.\n";
+        }
+    } while (choice != 5);
+
+    return 0;
 }
 

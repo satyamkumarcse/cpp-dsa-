@@ -38,11 +38,122 @@ int main(){
 */
 
 
+#include <iostream>
+#include <vector>
+#include <climits>
+
+using namespace std;
+
+
+
+// int main(){
+
+//     vector<int> vec1 = {1,1,2,3};
+//     vector<int> vec2 = {2,3,4,4};
+
+//     vector<int> result;
+
+//     int i = 0;
+//     int j = 0;
+//     int x = vec1.size();
+//     int y = vec2.size();
+
+
+//     while(i<x && j<y){
+
+//         if(vec1[i]<vec2[j]){
+//             if(result.size()==0 || result.back()!=vec1[i]){
+//                 result.push_back(vec1[i]);
+//             }
+//             i++;
+        
+//         }
+//         else{
+//             if(result.size()==0 || result.back()!=vec2[j]){
+//                 result.push_back(vec2[j]);
+//             }
+//             j++;
+//         }
+        
+       
+        
+
+//     }
+
+//     while(i<x){
+//           if(vec1[i]<vec2[j]){
+//             if(result.size()==0 || result.back()!=vec1[i]){
+//                 result.push_back(vec1[i]);
+//             }
+//             i++;
+//     }
+
+//     while(i<y){
+//          if(result.size()==0 || result.back()!=vec2[j]){
+//                 result.push_back(vec2[j]);
+//             }
+//             j++;
+//         }
+        
+
+//     }
+
+//     for(auto ele : result){
+//         cout<<ele<<" ";
+//     }
+
+//     return 0; 
+
+// }
 
 
 
 
+// int main(){
+
+//     vector<int> vec1={1,2,2,3,3,4,5,6};
+//     vector<int> vec2={2,3,3,5,6,6,7};
+//     vector<int> result;
 
 
+//     int i = 0;
+//     int j = 0;
 
+//     int n1 = vec1.size();
+//     int n2 = vec2.size();
+
+
+//     while(i<n1 && j<n2){
+
+//         if(vec1[i]<vec2[j]){
+//             i++;
+//         }
+//         else if(vec1[i]>vec2[j]){
+//             j++;
+
+//         }
+//         else{
+
+//             if(result.size()==0 || result.back()!=vec1[i]){
+                
+//             result.push_back(vec1[i]);
+        
+
+
+//     }
+//     i++;
+//     j++;
+
+// }
+
+// }
+
+//     for(auto ele : result){
+//         cout<<ele<<" ";
+//     }
     
+//     return 0;
+// }
+
+
+

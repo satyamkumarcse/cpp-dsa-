@@ -9,7 +9,7 @@
 // map<string,int> mp;
 
 
-// for changing or inserting new key values we use this syntax 
+// for changing(update) or inserting new key values we use this syntax 
 // m[key]=value;
 // if already a key exists with that name 
 // its value will be overwrite/updated

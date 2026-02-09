@@ -38,13 +38,10 @@ int main(){
 // what is the space that we are using to solve the problem?
 // O(n) : as we are using an array of n element in our algorithm
 // what is the extra space youre using?
-// O(1) : no extra space 
+// O(1) : no extra space (auxiliary space)
 
 /*
 the extra space im using is O(1), but in order to solve this problem, im using this following array ([1,2,3,4,5]) ie- O(n) space is beign used */
-
-
-
 
 
 
@@ -99,7 +96,7 @@ int main(){
     
 
 // brute force approach 
-// the elements that will be affected due to shift, put them in a array named as temp.
+// the elements that will be affected due to shift(change their side), put them in a array named as temp.
 
 
 
@@ -110,7 +107,7 @@ int main(){
 
 // int main(){
 //     int n;
-//     cout << "rotate an array by n places: enter n ";
+//     cout << "rotate an array to left by n places: enter n ";
 //     cin >> n;
 
 //     vector<int> vec = {1,2,3,4,5,6,7};
@@ -176,6 +173,8 @@ int main(){
     cin >> n;
 
     vector<int> vec = {1,2,3,4,5,6,7};
+    // {4, 5, 6, 7, 1, 2, 3} (if rotated left 3 elements)
+
     int x = vec.size();
     int end = vec.size()-1;
     int start = 0;
@@ -237,7 +236,7 @@ void reverse(vector<int> &vec,int start,int end){
 
 
 /*
-c++ stl feature for reverse 
+c++ stl feature for reversing a vector container elements
 
 #include <algorithm>
 reverse(arr.begin(),arr.end());
@@ -265,7 +264,7 @@ int main(){
  
 
     vector<int> vec = {1,2,3,4,5,6,7};
-    // 3 -> 5 6 7 1 2 3 4
+               // 3 -> 5 6 7 1 2 3 4
     vector<int> temp;
 
     int x = vec.size();
@@ -319,7 +318,7 @@ int main(){
        
 
        reverse(vec.end()-n,vec.end());
-       reverse(vec.begin(),vec.end()-n);
+       reverse(vec.begin(),vec.end()-n);    // reverse expects iterators, not indices.
        reverse(vec.begin(),vec.end());
 
 
@@ -339,7 +338,7 @@ int main(){
 
 
 // moving zeroes to the end of the array
-// brute approach 
+// brute approach  
 
 /*
 #include <iostream>
@@ -382,11 +381,13 @@ int main(){
 
 
 // t.c = O(2*n)
-// s.c = O(n) as we create a temp array
-// if assume no element is 0 then, entire array will be transferred in the temp array occupying n blocks stack space (wotst case)
+// s.c = O(n) as we create a temp array -> if assume no element is 0 then, entire array will be transferred in the temp array occupying n blocks stack space (wotst case)
 
 
-/*wrong answer as order of non zero elements are not maintained*/
+
+
+
+/*while trying to reduce s.c, wrong answer approach as order of non zero elements are not maintained*/
  
 /*
 int main(){
@@ -414,7 +415,7 @@ int main(){
 */
 
 
-/*wrong answer*/
+/*wrong answer while thinking two pointer approach (the approch for optimised answer is correct)*/
 // int main(){
 
 //     vector<int> vec = {1,0,2,3,2,0,0,4,5,1};
@@ -472,8 +473,14 @@ int main(){
 //         cout << ele << " ";
 //     }
 
+
 //     return 0;
 // }
+
+
+
+
+
 
 
 
@@ -518,7 +525,7 @@ int main(){
 
 // t.c = total is O(n)
 // s.c = O(1) (no extra space is used, the existing array is only beign modified)
-
+// the pointer j always remains at 0
 
 
 
@@ -565,7 +572,6 @@ int main(){
 
 /*
 #include <set>     // dont use unordered set, as we need a sorted order
-//n1 , n2 are size of set. we cant precisely determine t.c for a set
 
 int main(){
 
@@ -573,7 +579,7 @@ int main(){
     vector<int> vec2 = {2,3,4,4,5,6};
 
     set<int> s1;
-    int i=0;
+    int i=0; 
 
     for(int i=0;i<vec1.size();i++){
         s1.insert(vec1[i]);     //t.c = O(n1logn1)
@@ -616,72 +622,69 @@ int main(){
 
 
 
-
 // union of two sorted arrays - optimal 
 
 
+// int main(){
 
-/*
-int main(){
+//     // vector<int> arr1= {1,1,2,3,4,5};
+//     // vector<int> arr2= {1,3,4,4,5,6}; 
 
-    // vector<int> arr1= {1,1,2,3,4,5};
-    // vector<int> arr2= {1,3,4,4,5,6}; 
-
-    vector<int> arr1 = {1,2,2,2,3};
-    vector<int> arr2 = {2,2,2,4};
+//     vector<int> arr1 = {1,2,2,2,3};
+//     vector<int> arr2 = {2,2,2,4};
 
     
-    vector<int> unionarr;
+//     vector<int> unionarr;
     
-    int n1 = arr1.size();
-    int n2 = arr2.size();
+//     int n1 = arr1.size();
+//     int n2 = arr2.size();
 
-    int i=0,j=0;
+//     int i=0,j=0;
 
-    while(i<n1 && j<n2){
-        if(arr1[i]<arr2[j]){
-            if(unionarr.size()==0 || unionarr.back()!=arr1[i]){
-            unionarr.push_back(arr1[i]);
-        }
-        i++;
-        }
-        else{
-            if(unionarr.size()==0 || unionarr.back()!=arr2[j]){
-            unionarr.push_back(arr2[j]);
-        }
-        j++;
+//     while(i<n1 && j<n2){
+//         if(arr1[i]<arr2[j]){
+//             if(unionarr.size()==0 || unionarr.back()!=arr1[i]){
+//             unionarr.push_back(arr1[i]);
+//         }
+//         i++;
+//         }
+//         else{
+//             if(unionarr.size()==0 || unionarr.back()!=arr2[j]){
+//             unionarr.push_back(arr2[j]);
+//         }
+//         j++;
             
-        }
+//         }
         
-    }
+//     }
 
-    while(i<n1){
-        if(unionarr.size()==0 || unionarr.back()!=arr1[i]){
-            unionarr.push_back(arr1[i]);
-        }
-        i++;
+//     while(i<n1){
+//         if(unionarr.size()==0 || unionarr.back()!=arr1[i]){
+//             unionarr.push_back(arr1[i]);
+//         }
+//         i++;
 
-    }
+//     }
 
-    while(j<n2){
-        if(unionarr.size()==0 || unionarr.back()!=arr2[j]){
-            unionarr.push_back(arr2[j]);
-        }
-        j++;
+//     while(j<n2){
+//         if(unionarr.size()==0 || unionarr.back()!=arr2[j]){
+//             unionarr.push_back(arr2[j]);
+//         }
+//         j++;
 
-    }
+//     }
 
-    for(auto ele : unionarr){
-        cout<<ele<<" ";
-    }
+//     for(auto ele : unionarr){
+//         cout<<ele<<" ";
+//     }
 
-    return 0;
+//     return 0;
 
-    // arr1.back() -> last element of the container 
+//     // arr1.back() -> last element of the container 
 
 
-}
-*/
+// }
+
 
 
 // t.c -> O(n1+n2) 
@@ -693,97 +696,93 @@ int main(){
 
 
 
-// **************intersection of two sorted arrays*****************
+// **************intersection of two sorted arrays (frequency based)*****************
 // brute force (my intuition) (wrong partially)
 
 
 
-/*
-#include<set>
 
-int main(){
+// int main(){
 
 
-    vector<int> vec1={1,2,2,3,3,4,5,6};
+//     vector<int> vec1={1,2,2,3,3,4,5,6};
 
-    vector<int> vec2={2,3,3,5,6,6,7};
+//     vector<int> vec2={2,3,3,5,6,6,7};
 
-    vector<int> result;
-        set<int> s1;
+//     vector<int> result;
+//         set<int> s1;
 
-    for(int i=0;i<vec1.size();i++){
-         for(int j=0;j<vec2.size();j++){
-            if(vec1[i]==vec2[j]){
-                result.push_back(vec1[i]);
-                break;
-            }
+//     for(int i=0;i<vec1.size();i++){
+//          for(int j=0;j<vec2.size();j++){
+//             if(vec1[i]==vec2[j]){
+//                 result.push_back(vec1[i]);
+//                 break;
+//             }
             
-         } 
+//          } 
 
-        }
+//         }
 
-    for(int i=0;i<result.size();i++){
-            s1.insert(result[i]);
-        }
-
-
-    for(auto ele : s1){
-        cout<<ele<<" ";
-    }
-
-        return 0;
-    }
-*/
+//         for(auto ele : result){
+//             cout<<ele<<" ";
+//         }
 
 
-// t.c -> O(n1*n2) + O(k log k)
+//         return 0;
+//     }
+
+
+
+// t.c -> O(n1*n2)
 // s.c -> O(k)
 
 
 
-// better brute force 
+//  brute force (2 arrays intersection, frequency based) 
 
 
-/*
-#include<set>
 
-int main(){
+// #include<set>
 
-
-    vector<int> vec1={1,2,2,3,3,4,5,6};
-    vector<int> vec2={2,3,3,5,6,6,7};
-    vector<int> result;
-
-    vector<int> visited(vec2.size(),0);    // using this we avoided set STL CONTAINER 
-
-    for(int i=0;i<vec1.size();i++){
-        for(int j=0;j<vec2.size();j++){
-            if(vec1[i]==vec2[j] && visited[j]==0){
-                result.push_back(vec1[i]);
-                visited[j]=1;
-                break;
-            }
-            if(vec2[j]>vec1[i]){
-                break;
-            }
-        }
-    }
-
-    for(auto ele : result){
-        cout<<ele<<" ";
-    }
-
-    return 0;
+// int main(){
 
 
-}
-*/
+//     vector<int> vec1={1,2,2,3,3,4,5,6};
+//     vector<int> vec2={2,3,3,5,6,6,7};
+//     vector<int> result;
+
+//     vector<int> visited(vec2.size(),0);    // using this we avoided set STL CONTAINER 
+
+//     for(int i=0;i<vec1.size();i++){
+//         for(int j=0;j<vec2.size();j++){
+//             if(vec1[i]==vec2[j] && visited[j]==0){
+//                 result.push_back(vec1[i]);
+//                 visited[j]=1;
+//                 break;
+//             }
+//             if(vec2[j]>vec1[i]){
+//                 break;
+//             }
+//         }
+//     }
+
+//     for(auto ele : result){
+//         cout<<ele<<" ";
+//     }
+
+//     return 0;
+
+
+// }
+
+
+
 
 // t.c = O(n1*n2) 
 // s.c = O(n2) or O(n1) {if smaller array is visited arry,more optimised by some extent} 
 
 
-/*
+
 int main(){
 
     vector<int> vec1={1,2,2,3,3,4,5,6};
@@ -823,7 +822,7 @@ int main(){
 
     return 0;
 }
-*/
+
 
 
 
@@ -842,3 +841,55 @@ Otherwise every algorithm that returns an array would be O(n) space, which makes
 
 So we measure only the extra working memory.
 */
+
+
+// optimised code for printing only unique intersection elements 
+
+
+
+
+int main(){
+
+    vector<int> vec1={1,2,2,3,3,4,5,6};
+    vector<int> vec2={2,3,3,5,6,6,7};
+    vector<int> result;
+
+
+    int i = 0;
+    int j = 0;
+
+    int n1 = vec1.size();
+    int n2 = vec2.size();
+
+
+    while(i<n1 && j<n2){
+
+        if(vec1[i]<vec2[j]){
+            i++;
+        }
+        else if(vec1[i]>vec2[j]){
+            j++;
+
+        }
+        else{
+
+            if(result.size()==0 || result.back()!=vec1[i]){
+                
+            result.push_back(vec1[i]);
+    
+    }
+    i++;
+    j++;
+
+}
+
+}
+
+    for(auto ele : result){
+        cout<<ele<<" ";
+    }
+    
+    return 0;
+}
+
+

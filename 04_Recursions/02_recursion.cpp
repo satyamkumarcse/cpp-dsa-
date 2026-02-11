@@ -13,10 +13,11 @@ void printnum(int count){
     if(count==3){
         return;
     }
-
+     count++;
+      printnum(count);
     cout<<count<<endl;
-    count++;
-    printnum(count);
+   
+  
 
 }
 

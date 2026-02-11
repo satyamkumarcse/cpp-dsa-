@@ -43,6 +43,7 @@ search space goes from 10->4->1->0-> -1. (when high crosses low stop.)
 
 */
 
+
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -64,7 +65,7 @@ int main(){
         m = l + (u-l)/2;
 
         if(nums[m]>=target){
-            ans = m;
+            ans = m;     //potential answer, so store 
             u = m-1;
         }
         else{
@@ -74,7 +75,7 @@ int main(){
 
     }
 
-    cout<<ans;
+    cout<<"index is: "<<ans;
 
     return 0;
 
@@ -87,15 +88,15 @@ Space complexity: O(1)
 */
 
 
-// direct formual to find lowerbound 
+// // direct formual to find lowerbound 
 
-int x = lower_bound(arr.begin(),arr.end(),target)-arr.begin()
+// int x = lower_bound(arr.begin(),arr.end(),target)-arr.begin()
 
-// iterator is returned, it has to be subtracted by arr.begin() to get the index
+// // iterator is returned, it has to be subtracted by arr.begin() to get the index
 
-// if asked to find lower bound only between 2nd to 6th index in the array 
+// // if asked to find lower bound only between 2nd to 6th index in the array 
 
-int x = lower_bound(arr.begin()+2,arr.begin()+7,target)-(arr.begin()+2);
+// int x = lower_bound(arr.begin()+2,arr.begin()+7,target)-(arr.begin()+2);
 
 
 
@@ -115,57 +116,57 @@ int x = lower_bound(arr.begin()+2,arr.begin()+7,target)-(arr.begin()+2);
 // upper bound implementation 
 
 
-#include <iostream>
-#include <vector>
-using namespace std;
+// #include <iostream>
+// #include <vector>
+// using namespace std;
 
 
-int main(){
-    // vector<int> nums={1,2,3,3,7,8,9,9,9,11};
-    vector<int> nums={2,3,6,7,8,8,11,11,11,12};
-    int target = 11;
+// int main(){
+//     // vector<int> nums={1,2,3,3,7,8,9,9,9,11};
+//     vector<int> nums={2,3,6,7,8,8,11,11,11,12};
+//     int target = 11;
 
-    int x = nums.size();
-    int l = 0;
-    int u = x-1;
-    int m;
-    int ans = x;
+//     int x = nums.size();
+//     int l = 0;
+//     int u = x-1;
+//     int m;
+//     int ans = x;
 
-    while(l<=u){
+//     while(l<=u){
 
-        m = l + (u-l)/2;
+//         m = l + (u-l)/2;
 
-        if(nums[m]>target){     // just make change here 
-            ans = m;
-            u = m-1;
-        }
-        else{
-            l = m+1;
-        }
-
-
-    }
-
-    cout<<ans; 
-
-    return 0;
-
-}
-
-// t.c = o(logn)
-// s.c = o(1)
+//         if(nums[m]>target){     // just make change here 
+//             ans = m;
+//             u = m-1;
+//         }
+//         else{
+//             l = m+1;
+//         }
 
 
+//     }
+
+//     cout<<ans; 
+
+//     return 0;
+
+// }
+
+// // t.c = o(logn)
+// // s.c = o(1)
 
 
-// direct formual to find upperbound 
 
-int x = upper_bound(arr.begin(),arr.end(),target)-arr.begin()
 
-// iterator is returned, it has to be subtracted by arr.begin() to get the index
+// // direct formual to find upperbound 
 
-// if asked to find upper bound only between 2nd to 6th index in the array 
+// int x = upper_bound(arr.begin(),arr.end(),target)-arr.begin()
 
-int x = ypper_bound(arr.begin()+2,arr.begin()+7,target)-(arr.begin()+2);
+// // iterator is returned, it has to be subtracted by arr.begin() to get the index
+
+// // if asked to find upper bound only between 2nd to 6th index in the array 
+
+// int x = ypper_bound(arr.begin()+2,arr.begin()+7,target)-(arr.begin()+2);
 
 

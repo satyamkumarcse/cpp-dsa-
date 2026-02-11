@@ -382,41 +382,76 @@ If for every value of the outer loop, the inner loop would run n times, then it 
 
 
 
-#include <bits/stdc++.h>
-using namespace std;
+// #include <bits/stdc++.h>
+// using namespace std;
 
-int main() {
-    vector<int> nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
-    int n = nums.size();
+// int main() {
+//     vector<int> nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+//     int n = nums.size();
 
-    int sum = 0;
-    int maxSum = INT_MIN;
+//     int sum = 0;
+//     int maxSum = INT_MIN;
 
-    int start = 0;
-    int arrStart = 0, arrEnd = 0;
+//     int start = 0;
+//     int arrStart = 0, arrEnd = 0;
 
-    for (int i = 0; i < n; i++) {
-        sum += nums[i];
+//     for (int i = 0; i < n; i++) {
+//         sum += nums[i];
 
-        if (sum > maxSum){ 
-            maxSum = sum;
-            arrStart = start;
-            arrEnd = i;
-        }
+//         if (sum > maxSum){ 
+//             maxSum = sum;
+//             arrStart = start;
+//             arrEnd = i;
+//         }
 
-        if (sum < 0) {
-            sum = 0;
-            start = i + 1;
-        }
+//         if (sum < 0) {
+//             sum = 0;
+//             start = i + 1;
+//         }
+//     }
+
+//     cout << "Maximum Subarray Sum: " << maxSum << endl;
+//     cout << "Subarray: ";
+
+//     for (int i = ansStart; i <= ansEnd; i++) {
+//         cout << nums[i] << " ";
+//     }
+//     cout << endl;
+
+//     return 0;
+// }
+
+void search(vec<>&arr,int l,int u){
+    if(l<=u){
+        return ;
+    }
+    m = l+(u-l)/2;
+
+    if(nums[m]>target){
+        search(arr,l,m+1);
+
+    }
+    else if(nums[m]<target){
+         search(arr,m-1,u);
+
     }
 
-    cout << "Maximum Subarray Sum: " << maxSum << endl;
-    cout << "Subarray: ";
+    
+   
 
-    for (int i = ansStart; i <= ansEnd; i++) {
-        cout << nums[i] << " ";
-    }
-    cout << endl;
+
+}
+
+
+int main(){
+
+    int x = arr.size()
+    int l = 0;
+    int u = x-1;
+    int target = p;
+
+    search(arr,l,u,p);
+
 
     return 0;
 }

@@ -1,399 +1,570 @@
-// floor and ceil 
 
-// floor - largest number in the array either equal or less than x 
-
-// ceil - smallest number in the array either equal or more than x 
-
-// imagine room walls from 0 to x metres coordinates
-
-// eg1- arr = [10 20 30 40 50]
-// x = 25 has floor = 20 , and ceil = 30
-
-// eg2- arr = [10 20 25 30 40] : x = 25
-// floor = ceil = 25
-
-// return -1 if no floor or ceil exist
+// 33. Search in Rotated Sorted Array
 
 
 
+// brute force - o(n)
 
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
 
-
-
-// code for floor of a target
-
-
-
-
-// #include <iostream>
-// #include <vector>
-// using namespace std;
-
-
-// int main(){
-    
-//     vector<int> nums={10, 20, 30, 40, 50};
-//     int target = 2;
-
-//     int low=0;
-//     int m;
-//     int high = nums.size()-1;
-
-//     while(low<=high){
-
-//         m = low + (high-low)/2;
-
-//         if(nums[m]<=target){
-
-//             low = m+1;
-
-//         }
-//         else{
-
-//             high = m-1;
-//         }
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]==target){
+                return i;
+                
+            }
+        }
+        return -1;
         
-
-//     }
-
-//     if(target<nums[0]){
-//         cout<<-1;
-//     }
-//     else{
-//          cout<<nums[high];
-
-
-//     }
-
-//     return 0;
-
-
-// }
-
-
-// t.c = o(logn)
-// s.c = o(1)
+    }
+};
 
 
 
+// eg - take example of arr [1,2,3,4,5]
+// target element = 1 
+// target element = 5
+
+// when target element was 1 , mid = 3. so we will not search in the right side this was made sure 
+// when target element was 5, mid=3, left side of search space will be eliminated. so we will not search in the left side this was made sure 
 
 
 
+/*wrong answer, wrong approach*/
 
-// code of ceil for a target
+class Solution {
+public:
+
+    void merge(vector<int>& nums, int low, int m, int high){
+
+        int p1 = low;
+        int p2 = m + 1;
+        vector<int> temp;
+
+        while(p1 <= m && p2 <= high){
+            if(nums[p1] <= nums[p2]){
+                temp.push_back(nums[p1]);
+                p1++;
+            }
+            else{
+                temp.push_back(nums[p2]);
+                p2++;
+            }
+        }
+
+        while(p1 <= m){
+            temp.push_back(nums[p1]);
+            p1++;
+        }
+
+        while(p2 <= high){
+            temp.push_back(nums[p2]);
+            p2++;
+        }
+
+        for(int i = low; i <= high; i++){
+            nums[i] = temp[i - low];
+        }
+    }
+
+    void sort(vector<int>& nums, int low, int high){
+        if(low >= high){
+            return;
+        }
+
+        int m = low + (high - low) / 2;
+
+        sort(nums, low, m);
+        sort(nums, m + 1, high);
+        merge(nums, low, m, high);
+    }
 
 
-// #include <iostream>
-// #include <vector>
-// using namespace std;
+    int search(vector<int>& nums, int target) {
 
+        int x = nums.size();
+        int low = 0;
+        int high = x-1;
+        int m = low + (high-low)/2;
+        sort(nums,low,high);
 
-// int main(){
-    
-//     vector<int> nums={10, 20, 30, 40, 50};
-//     int target = 23;
+        while(low<=high){
 
-//     int low=0;
-//     int m;
-//     int high = nums.size()-1;
+            m = low + (high-low)/2;
 
-//     while(low<=high){
+            if(nums[m]==target){
+                return m;
+                
+            }
+            else if(nums[m]>target){
+                high = m-1;
+            }
+            else{
+                low = m+1;
+            }
 
-//         m = low + (high-low)/2;
+        }
 
-//         if(nums[m]<=target){
-
-//             low = m+1;
-
-//         }
-//         else{
-
-//             high = m-1;
-//         }
+        return -1;
         
-
-//     }
-
-//     if(target>nums[nums.size()-1]){
-//         cout<<-1;
-//     }
-//     else{
-//          cout<<nums[low];
-
-
-//     }
-
-//     return 0;
-
-
-// }
+    }
+};
 
 
 
-
-// 34. Find First and Last Position of Element in Sorted Array - brute force
-
-
-
-// class Solution {
-// public:
-//     vector<int> searchRange(vector<int>& nums, int target) {
-//            int x = nums.size();
-//            int first = -1;
-//            int last = -1;
-//            bool found = false;
-
-//         for(int i=0;i<x;i++){
-//             if(nums[i]==target){
-//                 found = true;
-//                 if(first ==-1){first = i;}
-//                 last = i;
-//             }
-//         }
-
-        
-//         if(found){
-//             return{first,last};
-//         }
-//         else{
-//             return {-1,-1};
-
-//         }
-        
-//     }
-// };
-
-
-
-// t.c = o(n)
-
-
-
-
-
-
-
-// optimal solution will have log(n) as t.c 
 // optimal solution 
 
-//  using lower bound and upper bound
+// it was mentioned that the array has been sorted and then rotated. sorting it again makes no sense and we also loose the track of the index of target element.
+
+// Find the middle element
+// 2. Identify which half is sorted:
+//    - If arr[left] <= arr[mid], left half is sorted
+//    - Otherwise, right half is sorted
+   
+// 3. Check if target is in the sorted half:
+//    - If yes, search that half and eliminate the other one
+//    - If no, search the other half and eliminate (vive versa)
 
 
 
-// class Solution {
-// public:
-//     int lowerbound(vector<int>& nums,int n,int target){
+
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int low = 0;
+        int high = nums.size() - 1;
         
-
-//             int low=0;
-//             int high = nums.size()-1;
-//             int ans = nums.size();
-
-//             while(low<=high){
-//                 int m = low + (high-low)/2;
-//                 if(nums[m]>=target){
-//                     ans = m;
-//                     high = m-1;
-
-//                 }
-//                 else{
-//                     low = m+1;
-//                 }
-
-//             }
-
-//             return ans;
-//         }
-
-//     int upperbound(vector<int>& nums,int n,int target){
-
-//             int low=0;
-//             int high = nums.size()-1;
-//             int ans = nums.size();
-
-//             while(low<=high){
-//                 int m = low + (high-low)/2;
-//                 if(nums[m]>target){
-//                     ans = m;
-//                     high = m-1;
-
-//                 }
-//                 else{
-//                     low = m+1;
-//                 }
-
-//             }
-
-//             return ans;
-//         }
-
-//     vector<int> searchRange(vector<int>& nums, int target) {
-
-//         int n = nums.size();
-
-//         int lb = lowerbound(nums,nums.size()-1,target);
-//         int ub = upperbound(nums,nums.size()-1,target);
-
-//         if(lb == n || nums[lb]!=target){return {-1,-1};}   // if target element is not present or lower bound wrt target cant be found in array (nums[n] is outofbound) thus, we return {-1,-1}
-//         else{
-//             return {lb,ub-1};
-//         }
-
-//     }
-// };
-
-
-// t.c = 2*o(log n)
-// s.c = o(1)
-
-
-
-
-
-
-
-
-// plane binary search code for this question 
-
-// arr = [2,8,8,8,8,11,13];
-
-
-
-
-
-#include <iostream>
-#include <vector>
-using namespace std;
-
-int main(){
-
-    vector<int>arr = {2,8,8,8,8,11,13};
-    int target = 8;
-
-    // FIRST OCCURRENCE
-    int low1 = 0;
-    int high1 = arr.size() - 1;
-    int m1;
-
-    while(low1 <= high1){
-        m1 = low1 + (high1 - low1) / 2;
-
-        if(arr[m1] == target){
-            high1 = m1 - 1;       //  Search LEFT for earlier occurrence
+        while(low <= high){
+            int mid = low + (high - low) / 2;
+            
+            // Found target
+            if(nums[mid] == target){
+                return mid;
+            }
+            
+            // CASE A: Left half [low...mid] is sorted
+            if(nums[low] <= nums[mid]){
+                // Check if target is in sorted left half
+                if(nums[low] <= target && target < nums[mid]){
+                    high = mid - 1;  // Search left
+                }
+                else{
+                    low = mid + 1;   // Search right (unsorted half)
+                }
+            }
+            // CASE B: Right half [mid...high] is sorted
+            else{
+                // Check if target is in sorted right half
+                if(nums[mid] < target && target <= nums[high]){
+                    low = mid + 1;   // Search right
+                }
+                else{
+                    high = mid - 1;  // Search left (unsorted half)
+                }
+            }
         }
-        else if(arr[m1] < target){
-            low1 = m1 + 1;        //  Go RIGHT
-        }
-        else{  // arr[m1] > target
-            high1 = m1 - 1;       //  Go LEFT
-        }
+        
+        return -1;  // Not found
     }
+};
 
-    int x = low1;  //  After loop, low1 points to first occurrence
 
 
-    // LAST OCCURRENCE
-    int low2 = 0;
-    int high2 = arr.size() - 1;
-    int m2;
 
-    while(low2 <= high2){
-        m2 = low2 + (high2 - low2) / 2;
 
-        if(arr[m2] == target){
-            low2 = m2 + 1;        //  Search RIGHT for later occurrence
+// ## The Problem
+
+// **Given**: A sorted array that has been rotated at some pivot  
+// **Example**: `[0,1,2,4,5,6,7]` rotated becomes `[4,5,6,7,0,1,2]`  
+// **Task**: Find target in O(log n) time
+
+// ---
+
+// ## Why Regular Binary Search Fails
+
+// **Regular Binary Search** assumes the **entire array is sorted**.
+
+// ```
+// Regular sorted: [0,1,2,4,5,6,7]
+//                     ↑
+//                    mid
+// If target < mid → search left
+// If target > mid → search right
+// ```
+
+// **Rotated array**: `[4,5,6,7,0,1,2]`
+// ```
+//                     ↑
+//                    mid=7
+// If target=0 (which is < 7)
+// Regular binary search → search left [4,5,6]
+// But 0 is actually on the RIGHT [0,1,2] ❌
+// ```
+
+// The rotation **breaks the sorted property**, so we can't blindly compare target with mid.
+
+// ---
+
+// ## The Key Insight
+
+// **In a rotated sorted array, at least ONE half is always sorted.**
+
+// ```
+// Array: [4,5,6,7,0,1,2]
+//         ↑      ↑      ↑
+//        low    mid   high
+
+// Left half:  [4,5,6,7] ✓ SORTED
+// Right half: [0,1,2]   ✓ SORTED
+
+// Array: [6,7,0,1,2,4,5]
+//         ↑      ↑      ↑
+//        low    mid   high
+
+// Left half:  [6,7,0]   ✗ NOT sorted (has rotation point)
+// Right half: [1,2,4,5] ✓ SORTED
+// ```
+
+// **Strategy**: 
+// 1. **Identify which half is sorted**
+// 2. **Check if target lies in the sorted half**
+// 3. **Search accordingly**
+
+// ---
+
+// ## How to Identify the Sorted Half
+
+// Compare `nums[low]` with `nums[mid]`:
+
+// ```cpp
+// if(nums[low] <= nums[mid]){
+//     // Left half is sorted
+// }
+// else{
+//     // Right half is sorted
+// }
+// ```
+
+// **Why this works?**
+
+// **Case 1**: Left half sorted
+// ```
+// [4,5,6,7,0,1,2]
+//  ↑      ↑
+// low    mid
+
+// 4 <= 7 ✓ → Left is sorted [4,5,6,7]
+// ```
+
+// **Case 2**: Right half sorted
+// ```
+// [6,7,0,1,2,4,5]
+//  ↑      ↑
+// low    mid
+
+// 6 <= 1 ✗ → Left has rotation, so Right is sorted [1,2,4,5]
+// ```
+
+// ---
+
+// ## The Complete Algorithm Logic
+
+// ### Step 1: Check if mid is the target
+// ```cpp
+// if(nums[mid] == target){
+//     return mid;  // Found it!
+// }
+// ```
+
+// ### Step 2: Determine which half is sorted
+
+// #### **Case A: Left half is sorted** (`nums[low] <= nums[mid]`)
+
+// ```
+// [4,5,6,7,0,1,2]  target = 5
+//  ↑      ↑      ↑
+// low    mid   high
+
+// Left: [4,5,6,7] is sorted
+// ```
+
+// **Now check**: Is target in this sorted range?
+
+// ```cpp
+// if(nums[low] <= target && target < nums[mid]){
+//     // Target is in sorted left half
+//     high = mid - 1;  // Search left
+// }
+// else{
+//     // Target must be in right half
+//     low = mid + 1;   // Search right
+// }
+// ```
+
+// **Example 1**: target = 5
+// - `nums[low]=4 <= 5` ✓
+// - `5 < nums[mid]=7` ✓
+// - Target IS in left sorted range → search left
+
+// **Example 2**: target = 0
+// - `nums[low]=4 <= 0` ✗
+// - Target NOT in left sorted range → search right
+
+// ---
+
+// #### **Case B: Right half is sorted** (`nums[low] > nums[mid]`)
+
+// ```
+// [6,7,0,1,2,4,5]  target = 4
+//  ↑      ↑      ↑
+// low    mid   high
+
+// Right: [1,2,4,5] is sorted
+// ```
+
+// **Now check**: Is target in this sorted range?
+
+// ```cpp
+// if(nums[mid] < target && target <= nums[high]){
+//     // Target is in sorted right half
+//     low = mid + 1;   // Search right
+// }
+// else{
+//     // Target must be in left half
+//     high = mid - 1;  // Search left
+// }
+// ```
+
+// **Example 1**: target = 4
+// - `nums[mid]=1 < 4` ✓
+// - `4 <= nums[high]=5` ✓
+// - Target IS in right sorted range → search right
+
+// **Example 2**: target = 7
+// - `nums[mid]=1 < 7` ✓
+// - `7 <= nums[high]=5` ✗
+// - Target NOT in right sorted range → search left
+
+// ---
+
+// ## Complete Code with Theory
+
+// --
+
+// ## Dry Run Example
+
+// **Array**: `[4,5,6,7,0,1,2]`, **Target**: `0`
+
+// ### Iteration 1:
+// ```
+// [4,5,6,7,0,1,2]
+//  ↑      ↑      ↑
+// low    mid   high
+
+// mid = 3, nums[mid] = 7
+// nums[low]=4 <= nums[mid]=7 → Left sorted
+// Is target in [4,5,6,7]? 
+//   4 <= 0? NO
+//   → Search RIGHT
+// low = mid + 1 = 4
+// ```
+
+// ### Iteration 2:
+// ```
+// [4,5,6,7,0,1,2]
+//         ↑  ↑  ↑
+//        low mid high
+
+// mid = 5, nums[mid] = 1
+// nums[low]=0 <= nums[mid]=1 → Left sorted
+// Is target in [0,1]?
+//   0 <= 0 < 1? YES
+//   → Search LEFT
+// high = mid - 1 = 4
+// ```
+
+// ### Iteration 3:
+// ```
+// [4,5,6,7,0,1,2]
+//         ↑
+//      low=mid=high
+
+// mid = 4, nums[mid] = 0
+// nums[mid] == target → FOUND!
+// Return 4
+// ```
+
+// ---
+
+// ## Why This Works: The Guarantee
+
+// **Mathematical guarantee**: 
+
+// In a rotated sorted array, when you divide it at any point:
+// - **At least one half MUST be completely sorted**
+// - The other half MAY contain the rotation point
+
+// This is because there's **only ONE rotation point** in the array.
+
+// ```
+// Original: [0,1,2,3,4,5,6,7]
+// Rotated:  [5,6,7,0,1,2,3,4]
+//               ↑
+//           rotation point
+
+// Any mid point creates:
+// - Either: both halves sorted (mid before rotation)
+// - Or: one sorted, one with rotation point
+// - Never: both halves unsorted
+// ```
+
+// ---
+
+// ## Summary
+
+// 1. **Rotated array** = one sorted array with one rotation point
+// 2. **At least one half is always sorted**
+// 3. **Identify the sorted half** using `nums[low] <= nums[mid]`
+// 4. **Check if target is in sorted half** using range comparison
+// 5. **If yes → search sorted half, if no → search other half**
+// 6. **Time**: O(log n) because we eliminate half each iteration
+
+// This is why the algorithm works! 🎯
+
+
+class Solution {
+public:
+    bool search(vector<int>& nums, int target) {
+
+        int x = nums.size();
+        int low = 0;
+        int high = x-1;
+
+        while(low<=high){
+
+            int mid = low + (high-low)/2;
+
+            if(nums[mid]==target){
+
+                return true;
+
+            }
+
+            if(nums[low]==nums[mid] && nums[mid]==nums[high]){
+                low++;
+                high--;
+                continue;
+            }
+
+            if(nums[low]<=nums[mid]){
+
+                if(nums[low]<=target && nums[mid]>target){
+
+                    high = mid - 1;
+                }
+                else{
+                    low = mid+1;
+                }
+            }
+            else{
+
+                if(nums[mid]<target && nums[high]>=target){
+
+                    low = mid+1;
+                }
+                else{
+
+                    high = mid-1;
+                }
+
+
+
+            }
+
+
         }
-        else if(arr[m2] < target){
-            low2 = m2 + 1;        //  Go RIGHT
-        }
-        else{  // arr[m2] > target
-            high2 = m2 - 1;       //  Go LEFT
-        }
+
+        return false;
+        
     }
-
-    int y = high2;  //  After loop, high2 points to last occurrence
-
-    cout << x << " " << y;
-
-    return 0;
-}
+};
 
 
 
 
-// for leetcode, for returning -1,-1 if targget element not present 
 
 
-#include <iostream>
-#include <vector>
-using namespace std;
 
-int main(){
+// Search in Rotated Sorted Array II - dupicate elements are present 
 
-    vector<int>arr = {2,8,8,8,8,11,13};
-    int target = 8;
 
-    // FIRST OCCURRENCE (eliminate right search space)
-    int low1 = 0;
-    int high1 = arr.size() - 1;
-    int first = -1;  //  Use a proper variable, not m1
+class Solution {
+public:
+    bool search(vector<int>& nums, int target) {
 
-    while(low1 <= high1){
-        int m1 = low1 + (high1 - low1) / 2;
+        int x = nums.size();
+        int low = 0;
+        int high = x-1;
 
-        if(arr[m1] == target){
-            first = m1;           //  Store potential answer
-            high1 = m1 - 1;       //  Search LEFT for earlier occurrence
+        while(low<=high){
+
+            int mid = low + (high-low)/2;
+
+            if(nums[mid]==target){
+
+                return true;
+
+            }
+
+            if(nums[low]==nums[mid] && nums[mid]==nums[high]){
+                low++;
+                high--;
+                continue;
+            }
+
+            if(nums[low]<=nums[mid]){
+
+                if(nums[low]<=target && nums[mid]>target){
+
+                    high = mid - 1;
+                }
+                else{
+                    low = mid+1;
+                }
+            }
+            else{
+
+                if(nums[mid]<target && nums[high]>=target){
+
+                    low = mid+1;
+                }
+                else{
+
+                    high = mid-1;
+                }
+
+
+
+            }
+
+
         }
-        else if(arr[m1] < target){
-            low1 = m1 + 1;        //  Go RIGHT
-        }
-        else{  // arr[m1] > target
-            high1 = m1 - 1;       //  Go LEFT
-        }
+
+        return false;
+        
     }
+};
 
-    // LAST OCCURRENCE (eliminate left search space)
-    int low2 = 0;
-    int high2 = arr.size() - 1;
-    int last = -1;  //  Use a proper variable, not m2
 
-    while(low2 <= high2){
-        int m2 = low2 + (high2 - low2) / 2;
-
-        if(arr[m2] == target){
-            last = m2;            //  Store potential answer
-            low2 = m2 + 1;        //  Search RIGHT for later occurrence
-        }
-        else if(arr[m2] < target){
-            low2 = m2 + 1;        //  Go RIGHT
-        }
-        else{  // arr[m2] > target
-            high2 = m2 - 1;       //  Go LEFT
-        }
-    }
-
-    cout << first << " " << last;
-
-    return 0;
-}
+/*Why needed?
+When nums[low] == nums[mid] == nums[high], we can't determine which side is sorted.
+Example: [1,1,1,1,1,1,1] or [1,0,1,1,1]
+We must linearly shrink the search space by moving both pointers inward.*/
 
 
 
 
-/*
-Trace for FIRST Occurrence
-Array: {2, 8, 8, 8, 8, 11, 13}, Target: 8
 
-Iteration | low1 | high1 | m1 | arr[m1] | Action
-----------|------|-------|----|---------|---------------------------------
-    1     |  0   |   6   | 3  |    8    | Found! first = 3, high1 = 2
-    2     |  0   |   2   | 1  |    8    | Found! first = 1, high1 = 0
-    3     |  0   |   0   | 0  |    2    | < 8, low1 = 1
-   End    |  1   |   0   | -  |    -    | low1 > high1, loop exits
 
-After loop ends:
-- low1 = 1 ✅ (points to first occurrence)
-- high1 = 0 ❌ (points to index 0, which is 2, NOT the target!)
-- first = 1 ✅ (stored when we last found target)
-*/
+

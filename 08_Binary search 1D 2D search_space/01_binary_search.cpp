@@ -36,33 +36,33 @@ Without sorting, that information does not exist.*/
 
 
 
-// class Solution {
-// public:
-//     int search(vector<int>& nums, int target) {
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
 
-//         int x = nums.size();
-//         int l = 0;
-//         int u = x-1;
+        int x = nums.size();
+        int l = 0;
+        int u = x-1;
 
-//         while(l<=u){
-//             int m = l + (u-l)/2;
+        while(l<=u){
+            int m = l + (u-l)/2;
 
-//             if(target==nums[m]){
-//                 return m;
-//             }
-//             else if(target>nums[m]){
-//                 l = m+1;
-//             }
-//             else{
-//                 u = m-1;
-//             }
-//         }
+            if(target==nums[m]){
+                return m;
+            }
+            else if(target>nums[m]){
+                l = m+1;
+            }
+            else{
+                u = m-1;
+            }
+        }
 
-//         return -1;
-//         // return l;      // if asked to return where to insert target element to keep order sorted
+        return -1;
+        // return l;      // if asked to return where to insert target element to keep order sorted
         
-//     }
-// };
+    }
+};
 
 
 
@@ -86,11 +86,11 @@ public:
             return m;
 
         }
-        else if(target>nums[m]){
+        else if(target>nums[m]){       // left search space is eliminated or trimmed
             return recursivesearch(nums,m+1,u,target);
         }
         else{
-            return recursivesearch(nums,l,m-1,target);
+            return recursivesearch(nums,l,m-1,target);    // right search space is trimmed
 
         }
 
@@ -114,6 +114,7 @@ public:
 
     
 };
+
 
 /*Time complexity: O(log n)
 

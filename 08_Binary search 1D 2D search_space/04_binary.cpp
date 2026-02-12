@@ -1,3 +1,7 @@
+// in binary search and related problems, just identify which half has to be eliminated in all types of problems 
+
+
+
 
 // 33. Search in Rotated Sorted Array
 
@@ -116,6 +120,7 @@ public:
 // optimal solution 
 
 // it was mentioned that the array has been sorted and then rotated. sorting it again makes no sense and we also loose the track of the index of target element.
+// either the left or the right will always be sorted
 
 // Find the middle element
 // 2. Identify which half is sorted:
@@ -433,66 +438,15 @@ public:
 // This is why the algorithm works! 🎯
 
 
-class Solution {
-public:
-    bool search(vector<int>& nums, int target) {
-
-        int x = nums.size();
-        int low = 0;
-        int high = x-1;
-
-        while(low<=high){
-
-            int mid = low + (high-low)/2;
-
-            if(nums[mid]==target){
-
-                return true;
-
-            }
-
-            if(nums[low]==nums[mid] && nums[mid]==nums[high]){
-                low++;
-                high--;
-                continue;
-            }
-
-            if(nums[low]<=nums[mid]){
-
-                if(nums[low]<=target && nums[mid]>target){
-
-                    high = mid - 1;
-                }
-                else{
-                    low = mid+1;
-                }
-            }
-            else{
-
-                if(nums[mid]<target && nums[high]>=target){
-
-                    low = mid+1;
-                }
-                else{
-
-                    high = mid-1;
-                }
-
-
-
-            }
-
-
-        }
-
-        return false;
-        
-    }
-};
 
 
 
 
+
+
+// return true if element exists in a sorted rotated array, the array has duplicate elements 
+
+// optimal solution
 
 
 
@@ -544,15 +498,12 @@ public:
                     high = mid-1;
                 }
 
-
-
             }
-
 
         }
 
         return false;
-        
+
     }
 };
 
@@ -561,6 +512,315 @@ public:
 When nums[low] == nums[mid] == nums[high], we can't determine which side is sorted.
 Example: [1,1,1,1,1,1,1] or [1,0,1,1,1]
 We must linearly shrink the search space by moving both pointers inward.*/
+
+
+// t.c = o(logn) -> average 
+// t.c = o(n/2) -> worst case
+// we keep shrinking until we dont satisfy this condition 
+// nums[low] == nums[mid] == nums[high]
+
+// eg- [3,3,1,3,3,3,3]
+// in worst case we shrink to near about half of the size of array
+
+
+// whenever you have a problem with "duplicates" try to solve the problem assuming unique and check where unique will fail
+
+
+
+
+
+
+
+
+// minimum in rotated sorted array 
+
+// optimal solution 
+// we know that in binary search we either eliminate the left half or right half search space as every step 
+
+// [4 5 6 7 0 1 2]
+
+// here the left half is sorted (4,5,6,7)
+// but right half is not sorted (7,0,1,2)
+
+// why is right half not sorted?
+// because the pivot (with ref to which array was rotated exists in right half) ie- rotating point is in the right half 
+// the mininum element will always exist at near the rotating point
+
+// the left sorted part will not have the answer (4,5,6,7)
+// the sorted part may or may not have the answer
+// edge cases - [4 5 1 2 3] , [1 2]
+
+
+// [4 5 6 7 0 1 2]
+
+// in the sorted region, pick the minimum element and eliminate the entire region
+// in step 1: we picked 4 and eliminated it 
+// then from the region {0,1,2}, we pick 0 and updated the min element which was 4. 
+// now as 2>0, let it be 
+
+
+// [7 8 1 2 3 4 5 6]
+
+// [2 1]
+//  l h
+//  m
+
+// thats why l<=m
+
+
+
+//  minimum in rotated sorted array
+// optimal solution 
+
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+
+        int temp = INT_MAX; 
+
+        int l = 0;
+        int h = nums.size()-1;
+
+        while(l<=h){
+
+            int m = l+(h-l)/2;
+
+            if(nums[l]<=nums[m]){
+
+                if(nums[l]<temp){
+                    temp = nums[l];
+                }
+
+                l = m+1;
+
+            }
+            else{
+
+                if(nums[m]<=nums[h]){
+
+                    if(nums[m]<temp){
+                        temp = nums[m];
+                    }
+                }
+                h = m-1;
+            }
+
+        }
+
+        return temp;
+        
+    }
+};
+
+
+// a bit more optimised solution 
+
+// [4 5 6 0 1 2]
+// in step 2, we areach to {0,1,2}
+// which is at other side of pivot
+// thus this part is always sorted 
+// if(arr[low]<arr[mid] && arr[mid]<arr[high])
+// then temp = arr[low] and arr[low] will be minimum
+// if a search space is already sorted, then arr[low] will always be smaller in that seach space.
+
+
+
+
+
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+
+        int temp = INT_MAX; 
+
+        int l = 0;
+        int h = nums.size()-1;
+
+        while(l<=h){
+
+            int m = l+(h-l)/2;
+
+            if(nums[l]<=nums[h]){
+                if(nums[l]<temp){
+                    temp = nums[l];
+                    break;
+                }   
+            }
+
+            if(nums[l]<=nums[m]){
+
+                if(nums[l]<temp){
+                    temp = nums[l];
+                }
+
+                l = m+1;
+
+            }
+            else{
+
+                if(nums[m]<=nums[h]){
+
+                    if(nums[m]<temp){
+                        temp = nums[m];
+                    }
+                }
+                h = m-1;
+            }
+
+        }
+        return temp;
+        
+    }
+};
+
+
+
+// t.c = o(logn)
+// s.c = o(1)
+
+
+
+// Minimum in Rotated Sorted Array II with duplicate
+
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+
+        int temp = INT_MAX; 
+
+        int l = 0;
+        int h = nums.size()-1;
+
+        while(l<=h){
+
+            int m = l+(h-l)/2;
+
+            if(nums[l]==nums[m] && nums[m]==nums[h]){
+                l++;
+                h--;
+                continue;
+            }
+
+            if(nums[l]<=nums[h]){
+                if(nums[l]<temp){
+                    temp = nums[l];
+                    break;
+
+
+                }
+                
+            }
+
+            if(nums[l]<=nums[m]){
+
+                if(nums[l]<temp){
+                    temp = nums[l];
+                }
+
+                l = m+1;
+
+            }
+            else{
+
+                if(nums[m]<=nums[h]){
+
+                    if(nums[m]<temp){
+                        temp = nums[m];
+                    }
+                }
+                h = m-1;
+            }
+
+        }
+
+        return temp;
+        
+    }
+};
+
+
+
+
+// find out how many times an array is right rotated  (not rotated n times , where n is array size)
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+
+    vector<int> nums={2,3,5,7,9,1};
+
+    int l =0;
+    int h = nums.size()-1;
+    int temp = INT_MAX;
+    int index=-1;
+        
+        while(l<=h){
+            int m = l+(h-l)/2;
+
+            if(nums[l]<=nums[h]){
+                temp = nums[l];
+                index = l;
+                break;
+            }
+
+            if(nums[l]<=nums[m]){
+                if(nums[l]<temp){
+                    temp = nums[l];
+                    index = l;
+
+                }
+                l = m+1;
+
+            }
+            else{
+
+                if(nums[m]<=nums[h]){
+                    if(nums[m]<temp){
+                        temp =nums[m];
+                        index = m;
+                }
+
+                h = m-1;
+    
+        }
+
+            }
+
+        }
+
+         cout<<index;
+
+        return 0;
+
+        
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

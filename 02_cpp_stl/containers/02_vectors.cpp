@@ -159,6 +159,16 @@ void explainvector(){
     // v1 = {30,40}
     // v.clear()  --> erases the vector 
     // erase/insert is in general costly function time complexity wise.
+
+
+    //code for finding index of an element present in vector container
+
+    auto it = find(vec.begin(),vec.end(),target);
+
+    if(it!=vec.end()){
+
+        int index = it - vec.begin();
+    }
      
 }
 

@@ -113,3 +113,72 @@ sum of all steps = sum of n natural numbers = n(n+1)/2 = n^2/2 + n/2 == O(n^2)
 
  
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// SC AND TC REVISION 
+
+
+Time complexity measures how execution time grows as input size increases.
+It does NOT measure actual seconds. It measures growth rate.
+We use Big O notation.
+
+Example:
+
+Input size N = 10   → time = 10 operations
+Input size N = 100  → time = 100 operations
+
+
+Time complexity = O(N)
+Linear growth.
+
+
+
+
+Space complexity measures extra memory used by the algorithm as input size increases.
+
+Important: Only extra memory is counted. Input storage is NOT counted.
+Example:
+
+vector<int> arr(n);
+
+Space complexity = O(N)
+because memory depends on n.
+
+
+
+
+for(int i=0;i<256;i++)
+constant
+
+SO t.c is
+O(256) = O(1)
+
+
+
+
+vector, map, array, recursion stack.
+
+Example:
+vector<int> v(n)
+SC = O(N)
+
+Example:
+
+vector<int> v(256)
+SC = O(1) because constant size.

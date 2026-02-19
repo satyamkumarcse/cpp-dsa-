@@ -1,7 +1,7 @@
 
 
-// sort characters for frequency 
-// brute force 
+// sort characters by frequency 
+
 
 /*
 string a = "hi"
@@ -14,7 +14,7 @@ a.append(3,'x')  : "hixxx"
 
 */
 
-
+// brute force 
 class Solution {
 public:
     string frequencySort(string s) {
@@ -41,7 +41,7 @@ public:
             }
 
         }
-          res.append(currentchar,maxchar);
+        res.append(currentchar,maxchar);
         vec[maxchar]=0;
 
          if(currentchar==0){break;}
@@ -56,6 +56,37 @@ public:
        
     }
 };
+
+/*
+6. When vector is the correct choice
+
+Use vector when domain size is fixed and small:
+
+ASCII characters -> 256
+lowercase letters -> 26
+digits -> 10
+
+Example:
+vector<int> freq(256,0);
+for(char c : s){
+    freq[c]++;
+}
+
+
+
+7. When unordered_map is required
+
+Use unordered_map when domain is large or unknown:
+
+Examples:
+vector<int> nums = {1000000000, -500000000, 999999999};
+
+Cannot do:
+vector<int> freq[1000000000]; // impossible
+Must use:
+unordered_map<int,int> freq;
+
+    */
 
 /*
 Final Answer (Interview Format)
@@ -147,18 +178,19 @@ Sometimes default sorting is not enough.
 Example:
 
 ```
+
+
 vector<pair<char,int>> v =
 {
     {'a', 3},
     {'b', 1},
     {'c', 2}
+
 };
-```
+
 
 We want to sort based on frequency (second value).
-
 Default sort sorts by first element (char), not what we want.
-
 So we use comparator.
 
 ---
@@ -236,7 +268,7 @@ Store as:
 
 ```
 ('t',1)
-('r',1)
+('r',1)     // thease are internally stored as pairs only by unordered map 
 ('e',2)
 ```
 
@@ -248,33 +280,6 @@ vector<pair<char,int>>
 */
 
 
-// better solution: 
-
-class Solution {
-public:
-    string frequencySort(string s) {
-
-        unordered_map<char,int> m1;
-
-        for(auto c : s){
-            m1[c]++;
-        }
-
-        vector<pair<char,int>> vec1(m1.begin(),m1.end());
-
-        sort(vec1.begin(),vec1.end(),[](pair<char,int> a,pair<char,int>b){return a.second>b.second;});   // o(n) = o(n log n)
-
-        string result = "";
-
-        for(auto it : vec1){
-
-            result.append(it.second,it.first);
-        }
-
-        return result;
-        
-    }
-};
 
 /*
 unordered_map<char, int> freq; 
@@ -299,6 +304,10 @@ Time: O(N)
 Space: O(1)
 
 frequency array is faster when charset is limited (ASCII).*/
+
+
+
+
 
 
 
@@ -363,9 +372,55 @@ Sorting takes:
 O(N log N)
 ```
 
+
+
+
+
+
+
+*/
+
+// better solution: 
+
+class Solution {
+public:
+    string frequencySort(string s) {
+
+        unordered_map<char,int> m1;
+
+        for(auto c : s){
+            m1[c]++;
+        }
+
+        vector<pair<char,int>> vec1(m1.begin(),m1.end());
+        /*is used to convert a frequency container into a vector so that you can sort it by frequency.*/
+
+        sort(vec1.begin(),vec1.end(),[](pair<char,int> a,pair<char,int>b){return a.second>b.second;});   // o(n) = o(n log n)
+
+        string result = "";
+
+        for(auto it : vec1){
+
+            result.append(it.second,it.first);
+        }
+
+        return result;
+        
+    }
+};
+
+
+
+
+
+
+// optimal explain
+
+/*
 We can do better using bucket sort.
 
 ---
+
 
 # Part 8: Bucket Sort Concept
 
@@ -564,4 +619,41 @@ Store characters at index equal to freq, traverse reverse.
 */
 
 // optimal Solution
+
+
+class Solution {
+public:
+    string frequencySort(string s) {
+
+        unordered_map<char, int> freq; 
+
+        for(char c : s) {
+            freq[c]++;
+        }
+
+        int n = s.size();
+
+        vector<vector<char>> bucket(n+1);
+
+        for(auto p : freq) {
+            bucket[p.second].push_back(p.first);
+        }
+
+        string result = "";
+
+        for(int i = n; i >= 1; i--) {
+
+            for(char c : bucket[i]) {
+                result.append(i, c);
+            }
+
+        }
+
+        return result;
+    }
+};
+
+
+//  tree
+// {{},{},{},{e}{t,r}}
 

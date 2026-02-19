@@ -446,6 +446,7 @@ public:
 
 // return true if element exists in a sorted rotated array, the array has duplicate elements 
 
+
 // optimal solution
 
 
@@ -616,7 +617,7 @@ public:
 // a bit more optimised solution 
 
 // [4 5 6 0 1 2]
-// in step 2, we areach to {0,1,2}
+// in step 2, we reach to {0,1,2}
 // which is at other side of pivot
 // thus this part is always sorted 
 // if(arr[low]<arr[mid] && arr[mid]<arr[high])
@@ -793,7 +794,6 @@ int main(){
          cout<<index;
 
         return 0;
-
         
 }
 

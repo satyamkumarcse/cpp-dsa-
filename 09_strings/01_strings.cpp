@@ -3,9 +3,7 @@
 /*
 accessing a string literal (char) : t.c & s.c is o(1)
 substring : o(k) is t.c and s.c
-concatenation : o(n+m) , n&m are their length
-
-
+concatenation : o(n+m) , n & m are their length
 */
 
 /*
@@ -16,7 +14,7 @@ stoll()  → string → long long
 stoul()  → string → unsigned long
 stoull() → string → unsigned long long
 
-to_string() → number → string
+to_string() → any number → string
 
 */
 
@@ -43,8 +41,8 @@ to_string() → number → string
 //     result+=z+'0';
 //     y/=10;
 // }
-
 // reverse(result.begin(),result.end());
+// 
 
 
 

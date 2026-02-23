@@ -183,19 +183,3 @@ int main(){
 }
 
 
-
-
-        node* temp = node;
-        node* prev = NULL;
-        while(temp!=NULL && temp!=node){
-            prev = temp;
-            temp=temp->next;
-        }
-        if(temp==NULL){return node;}
-        prev->next=temp->next;
-        free(temp);
-
-        return node;
-        
-
-        

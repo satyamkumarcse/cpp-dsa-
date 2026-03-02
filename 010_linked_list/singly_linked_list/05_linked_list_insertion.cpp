@@ -71,7 +71,7 @@ node* insert_last(node* head,int value){
 }
 
 
-node* insert_kth(node* head,int kth,int value){
+node* insert_kth(node* head,int kth,int value){    // inserting before kth node.
 
     if(kth==1){
         node *newnode = new node(value);
@@ -111,7 +111,7 @@ node* insert_before_value(node* head,int value,int ele){
     }
 
     node*temp=head;
-    node*prev=temp;
+    node*prev=NULL;
     int count=0;
     while(temp!=NULL && temp->data!=value){
         prev = temp;
@@ -124,7 +124,7 @@ node* insert_before_value(node* head,int value,int ele){
         node* newnode = new node(ele);
         newnode->next=head;
         head=newnode;
-        return newnode;
+        return head;
 
     }
     node* newnode = new node(ele);

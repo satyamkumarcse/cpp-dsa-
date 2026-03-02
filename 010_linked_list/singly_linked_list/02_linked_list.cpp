@@ -21,7 +21,7 @@ in arrays:
 int arr[]={1,2,3,4}
 elements are at index 0,1,2,3 .... they can easily be traversed
 in linked list: 
-as storing is done in heap and is done anywhere, we cant simply traverse like a array/list
+as storing is done in heap and is done randomly, we cant simply traverse like a array/list
 so for each "node" present in a linked list, inside each node : we have data and next
 
 starting point of a linked list is known as head of the linked list 

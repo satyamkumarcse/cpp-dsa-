@@ -83,7 +83,6 @@ node* insert_before_tail(node* head){
     if(head->next==NULL){
         newnode->next=head;  
         head->back=newnode;
-        newnode->back=NULL;
         head=newnode;
         return head;
     }
@@ -178,7 +177,7 @@ node* inserting_before_kth_ele(node* head,int ele,int value){
 
 }
 
-void inserting_before_kth_node(node* temp){
+void inserting_before_kth_node(node* temp){   // kth != 1 , we are not inserting before 1st node
 
     node* newnode = new node(10);
     if(temp==NULL){return;}
@@ -216,6 +215,9 @@ int main(){
 
 
 }
+
+
+
 
 
 

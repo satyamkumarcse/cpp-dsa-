@@ -112,7 +112,7 @@ node* delete_kth_ele(node* head,int k){   // nothing is deleted, if k>size of LL
         counter++;
         if(counter==k){
 
-            prev->next = prev->next->next;
+            prev->next = temp->next;
             free(temp);
             break;
         }
@@ -124,6 +124,7 @@ node* delete_kth_ele(node* head,int k){   // nothing is deleted, if k>size of LL
     return head;
 
 }
+
 
 node* delete_value_node(node* head,int value){
 
@@ -138,14 +139,14 @@ node* delete_value_node(node* head,int value){
     }
 
     if(temp==NULL){ return head;}
-    if(prev==NULL){
+    if(prev==NULL){    // this will be true, if we are asked to delete first node 
         node* temp=head;
         head=head->next; 
         free(temp);
         return head;
     }
    
-    prev->next=prev->next->next;
+    prev->next=temp->next;
     free(temp);
 
     return head;
@@ -175,7 +176,7 @@ int main(){
     // node* ahead = delete_kth_ele(head,3);
     //   print_LL(ahead);
 
-     node* vhead = delete_value_node(head,18);
+     node* vhead = delete_value_node(head,12);
        print_LL(vhead);
     
     

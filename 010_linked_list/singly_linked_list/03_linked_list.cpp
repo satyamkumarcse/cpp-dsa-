@@ -68,7 +68,7 @@ node* convertarrtoLL(vector<int> &vec){
 // traversing through a linkedlist 
 // 2 -> 3 -> 1 -> 8 -> NULL
 //head  
-// first rule : never tamper/mode head of a LL
+// first rule : never tamper/node head of a LL
 // because if me move the head of a LL, eg- if we move it to 2nd node, we will forget or delete the first node
 
 
@@ -90,7 +90,7 @@ int lengthofLL_traversingLL(node* head){
 
 bool search_in_a_LL(node *head,int target){
 
-    node*temp = head;
+    node* temp = head;
     while(temp!=NULL){
 
         if(temp->data==target){

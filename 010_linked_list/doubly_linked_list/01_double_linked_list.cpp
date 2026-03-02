@@ -30,7 +30,7 @@ struct node{
     }
     node(int data1){
         data = data1;
-        next = NULL;   // initially both next and back are NULL  
+        next = NULL;   // initially both next and back  NULL  
         back = NULL;
     }
 
@@ -107,7 +107,7 @@ node* delete_tail(node* head){
     
 }
 
-
+/*while deleting elements in a 2D linked list, 3 linked list are involved when deleting element of center. edge cases arise for first and last node deletion*/
 
 node* delete_kth_ele(node* head,int ele){
 

@@ -95,7 +95,7 @@ It does NOT modify original string.*/
 
 // eg
 // (()())(())
-// (()()) : (())
+// (()()) : (()) 
 
 // a partition is made
 // then remove outermost : we get answer as -> ()()()
@@ -731,7 +731,7 @@ public:
     }
 };
 
-// Each substr() call creates a new string, which is why it's O(n) per iteration
+// Each substr() call creates a new string, which is why it's O(n) per iteration , and in total o(n^2)
 
 
 
@@ -747,7 +747,7 @@ int pos = s.find("world");
 
 cout << pos;
 
-/*Output:
+/*Output: 
 6
 Because "world" starts at index 6.*/
 
